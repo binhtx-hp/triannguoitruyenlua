@@ -1,0 +1,3676 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Công Bố Giải Thưởng Cuộc Thi "Tri Ân Người Truyền Lửa" & Lễ Tôn Vinh Thầy Cô 20/11 | Đại học Y Hà Nội</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #d4af37;
+    --gold-light: #fef9e7;
+    --gold-soft: #f7e8bd;
+    --gold-deep: #aa820a;
+    --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f9e295 50%, #b8860b 100%);
+    --gold-glow: 0 0 25px rgba(212, 175, 55, 0.35);
+
+    --ruby: #c82333;
+    --ruby-deep: #8b0000;
+    --ruby-soft: #fff0f3;
+    --rose-petal: #ff758f;
+    --rose-gradient: linear-gradient(135deg, #e63946 0%, #ff758f 100%);
+
+    --ivory-bg: #fdfbf7;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: rgba(212, 175, 55, 0.6);
+    --card-shadow: 0 12px 35px rgba(184, 134, 11, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    
+    --ink: #1a2233;
+    --ink-light: #52617a;
+    --ink-muted: #8092aa;
+    
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-cinzel: 'Cinzel', serif;
+    --font-script: 'Alex Brush', cursive;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    background-color: var(--ivory-bg);
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(255, 240, 243, 0.8) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(254, 249, 231, 0.8) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(255, 248, 240, 0.5) 0px, transparent 70%),
+      radial-gradient(at 100% 100%, rgba(255, 235, 238, 0.6) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Canvas hoa rơi */
+  #petal-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99;
+  }
+
+  /* Header */
+  header.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+  }
+
+  .nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  /* Vòng tròn vàng bên ngoài logo giữ nguyên 48px trang trọng */
+  .emblem {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gold-gradient);
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--gold-glow);
+    flex-shrink: 0;
+  }
+
+  .emblem-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    overflow: hidden;
+  }
+
+  /* Ảnh logo bên trong thu nhỏ xuống 32x32px vừa vặn, không bị tràn sát viền vàng */
+  .site-brand-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 50%;
+    display: block;
+  }
+
+  /* Tên TRƯỜNG ĐẠI HỌC Y HÀ NỘI nổi bật với font sans chuẩn nét tiếng Việt và sắc đỏ hồng quý phái */
+  .brand-text h1 {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 2.2vw, 19px);
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    color: #e63946; /* Màu đỏ hồng rực rỡ */
+    line-height: 1.25;
+    margin-bottom: 2px;
+    text-shadow: 0 1px 2px rgba(230, 57, 70, 0.15);
+  }
+
+  @supports (-webkit-background-clip: text) or (background-clip: text) {
+    .brand-text h1 {
+      background: linear-gradient(135deg, #c81d3e 0%, #e63946 50%, #ff3366 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      filter: drop-shadow(0 2px 8px rgba(230, 57, 70, 0.22));
+    }
+  }
+
+  .brand-text p {
+    font-size: 12px;
+    color: var(--ink-light);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .badge-2010 {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #fff0f3 0%, #ffe3e8 100%);
+    border: 1px solid rgba(230, 57, 70, 0.3);
+    color: var(--ruby);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(230, 57, 70, 0.1);
+  }
+
+  .badge-db {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #166534;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.12);
+    transition: all 0.2s ease;
+  }
+  .badge-db:hover {
+    background: #dcfce7;
+    border-color: #22c55e;
+    transform: translateY(-1px);
+  }
+
+  .btn-icon {
+    background: #fff;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold-deep);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  .btn-icon:hover {
+    background: var(--gold-light);
+    border-color: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: var(--gold-glow);
+  }
+  .btn-icon.active {
+    background: var(--ruby-soft);
+    border-color: var(--rose-petal);
+    color: var(--ruby);
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    padding: 55px 24px 45px;
+    text-align: center;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), rgba(255, 117, 143, 0.18), rgba(212, 175, 55, 0.15));
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-radius: 999px;
+    padding: 7px 22px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ruby-deep);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(30px, 4.8vw, 52px);
+    font-weight: 800;
+    color: #1a2233;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-title .gold-text {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.25));
+  }
+
+  /* Highlight 2 nhiệm vụ rõ rệt */
+  .dual-mission-banner {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 22px auto 26px;
+    max-width: 900px;
+  }
+
+  .mission-card {
+    flex: 1 1 380px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 14px;
+    padding: 14px 20px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  }
+
+  .mission-icon {
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mission-icon.author { background: var(--ruby-soft); color: var(--ruby); }
+  .mission-icon.teacher { background: var(--gold-light); color: var(--gold-deep); }
+
+  .mission-info h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ruby-deep);
+    margin-bottom: 2px;
+  }
+  .mission-info p {
+    font-size: 12.5px;
+    color: var(--ink-light);
+    line-height: 1.4;
+  }
+
+  .hero-quote-poem {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 15.5px;
+    color: var(--ruby-deep);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px dashed rgba(212, 175, 55, 0.5);
+    padding: 12px 28px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  }
+
+  .hero-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 38px;
+  }
+
+  .btn-primary {
+    background: var(--gold-gradient);
+    color: #3b2a00;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.48);
+  }
+
+  .btn-secondary {
+    background: #fff;
+    color: var(--ruby-deep);
+    border: 1.5px solid rgba(230, 57, 70, 0.4);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.08);
+  }
+  .btn-secondary:hover {
+    background: var(--ruby-soft);
+    border-color: var(--ruby);
+    transform: translateY(-2px);
+  }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 16px;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 18px;
+    box-shadow: var(--card-shadow);
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 8px;
+    border-right: 1px solid rgba(212, 175, 55, 0.2);
+  }
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--font-cinzel);
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--ruby-deep);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Main Container */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* Section Header */
+  .section-title-wrap {
+    text-align: center;
+    margin: 45px 0 28px;
+  }
+
+  .section-badge {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold-deep);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    color: var(--ink);
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--gold-gradient);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .section-desc {
+    font-size: 14.5px;
+    color: var(--ink-light);
+    max-width: 720px;
+    margin: 8px auto 0;
+  }
+
+  /* Spotlight Stage (Auto-play Presentation - 10s) */
+  .spotlight-card {
+    background: var(--card-bg);
+    border: 3px solid rgba(212, 175, 55, 0.8);
+    border-radius: 24px;
+    box-shadow: 0 16px 45px rgba(212, 175, 55, 0.12);
+    overflow: hidden;
+    margin-bottom: 60px;
+    position: relative;
+  }
+
+  .spotlight-header {
+    background: linear-gradient(90deg, #fffaf0 0%, #fff0f3 100%);
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .spotlight-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pulse-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ruby);
+    box-shadow: 0 0 0 0 rgba(200, 35, 51, 0.5);
+    animation: pulse 1.8s infinite;
+  }
+  .pulse-indicator.paused {
+    animation: none;
+    background: var(--ink-muted);
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(200, 35, 51, 0.6); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(200, 35, 51, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(200, 35, 51, 0); }
+  }
+
+  .spotlight-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(212, 175, 55, 0.15);
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gold-gradient);
+    transition: width 0.1s linear;
+  }
+
+  .spotlight-body {
+    padding: 32px 30px;
+  }
+
+  /* Dual Spotlight Content Layout */
+  .spotlight-dual-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  @media (min-width: 900px) {
+    .spotlight-dual-grid {
+      grid-template-columns: 360px 1fr;
+      align-items: center;
+      gap: 36px;
+    }
+  }
+
+  .spotlight-teacher-col {
+    background: linear-gradient(180deg, #fffdf8 0%, #fff6e8 100%);
+    border: 1.5px solid rgba(212, 175, 55, 0.35);
+    border-radius: 20px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.08);
+  }
+
+  .spotlight-avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 28px;
+    margin: 0 auto 16px;
+    padding: 5px;
+    background: var(--gold-gradient);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.45), var(--gold-glow);
+  }
+
+  .spotlight-avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .spotlight-teacher-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+    transition: transform 0.4s ease;
+  }
+  .spotlight-avatar:hover .spotlight-teacher-photo {
+    transform: scale(1.06);
+  }
+
+  .spotlight-avatar-inner svg {
+    width: 60%;
+    height: 60%;
+    color: var(--ruby-deep);
+  }
+
+  .spotlight-teacher-name {
+    font-family: var(--font-serif);
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .spotlight-teacher-org {
+    font-size: 13.5px;
+    color: var(--gold-deep);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .spotlight-author-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(230, 57, 70, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(230, 57, 70, 0.08);
+    text-align: left;
+  }
+
+  .spotlight-author-avatar {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    padding: 3px;
+    background: var(--rose-gradient);
+    box-shadow: 0 4px 14px rgba(230, 57, 70, 0.28);
+    flex-shrink: 0;
+  }
+  .spotlight-author-avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .spotlight-author-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  .spotlight-author-box:hover .spotlight-author-photo {
+    transform: scale(1.08);
+  }
+  .spotlight-author-avatar-inner svg {
+    width: 55%;
+    height: 55%;
+    color: var(--ruby);
+  }
+
+  .spotlight-article-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .spotlight-quote-box {
+    background: linear-gradient(135deg, rgba(254, 249, 231, 0.7) 0%, rgba(255, 240, 243, 0.7) 100%);
+    border-left: 4px solid var(--gold);
+    padding: 18px 22px;
+    border-radius: 0 16px 16px 0;
+    margin-bottom: 18px;
+  }
+
+  .spotlight-quote-text {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-style: italic;
+    color: #2b1f09;
+    line-height: 1.6;
+  }
+
+  .spotlight-prize-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+
+  .spotlight-article-title {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--ruby-deep);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .spotlight-article-p {
+    font-size: 15px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 74ch;
+  }
+
+  /* Awards Filter & Search Bar */
+  .filter-bar-container {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 18px;
+    padding: 16px 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-tab {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--ink-light);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-tab:hover {
+    background: var(--gold-light);
+    color: var(--gold-deep);
+  }
+  .filter-tab.active {
+    background: var(--gold-gradient);
+    color: #3b2a00;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    padding: 6px 14px;
+    min-width: 250px;
+  }
+  .search-box:focus-within {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    background: #fff;
+  }
+  .search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 13.5px;
+    width: 100%;
+    color: var(--ink);
+  }
+
+  /* Full Awards Grid - Thẻ Bằng Khen Dát Vàng Đồng Đẳng */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 24px;
+    margin-bottom: 70px;
+  }
+
+  .award-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    border: 3px solid var(--card-border);
+    padding: 24px 22px 20px;
+    position: relative;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .award-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(212, 175, 55, 0.18);
+    border-color: rgba(212, 175, 55, 0.95);
+  }
+
+  /* Hoa văn góc kiểu Bằng Khen */
+  .corner-ornament {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .corner-tl { top: 8px; left: 8px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+  .corner-tr { top: 8px; right: 8px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+  .corner-bl { bottom: 8px; left: 8px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+  .corner-br { bottom: 8px; right: 8px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+  .award-ribbon {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .tag-cat-dac-biet { background: var(--ruby); color: #fff; box-shadow: 0 3px 8px rgba(200, 35, 51, 0.25); }
+  .tag-cat-nhat { background: var(--gold-gradient); color: #3d2a00; }
+  .tag-cat-nhi { background: #e2e8f0; color: #334155; border: 1px solid #cbd5e1; }
+  .tag-cat-ba { background: #fff1e6; color: #c05621; border: 1px solid #fbd38d; }
+  .tag-cat-khuyen-khich { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+  .tag-cat-cong-hien { background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
+
+  /* Khối Thầy Cô được vinh danh trong thẻ */
+  .card-teacher-block {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+  }
+
+  .card-avatar {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    padding: 3.5px;
+    background: var(--gold-gradient);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+    flex-shrink: 0;
+  }
+
+  .card-avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .card-teacher-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  .award-card:hover .card-teacher-photo {
+    transform: scale(1.08);
+  }
+
+  .card-avatar-inner svg {
+    width: 60%;
+    height: 60%;
+    color: var(--ruby-deep);
+  }
+
+  .card-teacher-badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--ruby);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 1px;
+  }
+
+  .card-teacher-name {
+    font-family: var(--font-serif);
+    font-size: 17.5px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .card-teacher-org {
+    font-size: 12.5px;
+    color: var(--gold-deep);
+    font-weight: 600;
+  }
+
+  .card-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 13.5px;
+    color: #4a5568;
+    background: rgba(254, 249, 231, 0.45);
+    border-left: 3px solid var(--gold);
+    padding: 8px 12px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 14px;
+  }
+
+  /* Khối tác giả đoạt giải trong thẻ */
+  .card-author-block {
+    background: #fdfaf6;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+  }
+
+  .card-author-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .card-author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    padding: 2.5px;
+    background: var(--rose-gradient);
+    box-shadow: 0 3px 10px rgba(230, 57, 70, 0.22);
+    flex-shrink: 0;
+  }
+  .card-author-avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .card-author-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  .award-card:hover .card-author-photo {
+    transform: scale(1.08);
+  }
+  .card-author-avatar-inner svg {
+    width: 55%;
+    height: 55%;
+    color: var(--ruby);
+  }
+
+  .card-author-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ruby-deep);
+  }
+
+  .card-author-role {
+    display: none;
+  }
+
+  .card-article-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 4px;
+  }
+
+  .card-excerpt {
+    font-size: 12.5px;
+    color: var(--ink-light);
+    margin-top: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(212, 175, 55, 0.18);
+  }
+
+  .btn-read-story {
+    background: transparent;
+    border: none;
+    color: var(--ruby-deep);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+  }
+  .btn-read-story:hover {
+    color: var(--ruby);
+    transform: translateX(2px);
+  }
+
+  .interactive-reactions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-reaction {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink-light);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    user-select: none;
+  }
+  .btn-reaction:hover {
+    border-color: var(--rose-petal);
+    background: var(--ruby-soft);
+    color: var(--ruby);
+    transform: translateY(-1px) scale(1.06);
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.15);
+  }
+  .btn-reaction:active {
+    transform: scale(0.92);
+  }
+
+  .btn-reaction.pop-bounce {
+    animation: btnBounce 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes btnBounce {
+    0% { transform: scale(1); }
+    35% { transform: scale(1.22); border-color: var(--ruby); background: #ffe4e6; }
+    70% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+  }
+
+  .btn-reaction .count {
+    display: inline-block;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .btn-reaction .count.pop-number {
+    transform: scale(1.3);
+    color: var(--ruby-deep);
+    font-weight: 800;
+  }
+
+  /* Tường Hoa Tri Ân 20/11 (Guestbook / Wishes Wall) */
+  .wishes-section {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 243, 0.6) 100%);
+    border: 1.5px solid rgba(230, 57, 70, 0.25);
+    border-radius: 24px;
+    padding: 40px 30px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 70px;
+  }
+
+  .wishes-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (min-width: 960px) {
+    .wishes-grid-layout {
+      grid-template-columns: 340px 1fr;
+    }
+  }
+
+  .wishes-form {
+    background: #fff;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+    position: sticky;
+    top: 90px;
+  }
+
+  .wishes-form h3 {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    color: var(--ruby-deep);
+    margin-bottom: 6px;
+  }
+
+  .wishes-form p {
+    font-size: 13px;
+    color: var(--ink-light);
+    margin-bottom: 18px;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+  .form-control {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    font-family: inherit;
+    font-size: 13.5px;
+    background: #fff;
+  }
+  .form-control:focus {
+    outline: none;
+    border-color: var(--ruby);
+    box-shadow: 0 0 0 3px rgba(200, 35, 51, 0.12);
+  }
+
+  .flower-choice-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .flower-option {
+    flex: 1;
+    border: 1.5px solid #e2e8f0;
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 8px 4px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  .flower-option.selected {
+    border-color: var(--ruby);
+    background: var(--ruby-soft);
+    color: var(--ruby);
+    box-shadow: 0 3px 10px rgba(200, 35, 51, 0.15);
+  }
+
+  .wishes-display-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px dashed rgba(212, 175, 55, 0.35);
+  }
+
+  .wishes-display-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ruby-deep);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .wishes-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-shuffle-wishes {
+    background: #fff;
+    border: 1px solid var(--gold);
+    color: var(--gold-deep);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  }
+  .btn-shuffle-wishes:hover {
+    background: var(--gold-gradient);
+    color: #3b2a00;
+    transform: translateY(-1px);
+  }
+  .btn-shuffle-wishes.active {
+    background: var(--ruby-soft);
+    color: var(--ruby);
+    border-color: var(--rose-petal);
+  }
+
+  .wish-card.highlight-swap {
+    animation: swapGlow 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes swapGlow {
+    0% { transform: scale(0.96); box-shadow: 0 0 18px rgba(212, 175, 55, 0.6); border-left-color: var(--gold); }
+    50% { transform: scale(1.02); box-shadow: 0 0 22px rgba(230, 57, 70, 0.4); border-left-color: var(--ruby); }
+    100% { transform: scale(1); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03); }
+  }
+
+  .wishes-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .wish-card {
+    background: #fff;
+    border-left: 4px solid var(--rose-petal);
+    border-radius: 14px;
+    padding: 12px 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    position: relative;
+    border-top: 1px solid #f1f5f9;
+    border-right: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+    animation: fadeIn 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
+  }
+
+  .wish-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.18);
+    border-left-color: var(--ruby);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .wish-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+  }
+
+  .wish-author {
+    font-weight: 700;
+    font-size: 13.5px;
+    color: var(--ruby-deep);
+  }
+
+  .wish-recipient {
+    font-size: 11.5px;
+    background: var(--gold-light);
+    color: var(--gold-deep);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .wish-text {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.55;
+    margin: 4px 0 6px;
+    display: block;
+  }
+
+  .wish-time {
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-align: right;
+  }
+
+  /* Modal Bức Thư Tri Ân Song Hành */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .tribute-modal {
+    background: #fffdfa;
+    border: 4px solid var(--gold);
+    border-radius: 28px;
+    max-width: 1170px; /* Khung đọc bài chi tiết to hơn 1,5 lần (780px * 1.5 = 1170px) */
+    width: 95vw;
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 44px 50px 36px;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28), 0 0 45px rgba(212, 175, 55, 0.35);
+    transform: scale(0.92);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (max-width: 768px) {
+    .tribute-modal {
+      width: 96vw;
+      padding: 28px 18px 24px;
+      max-height: 90vh;
+      border-radius: 20px;
+    }
+  }
+
+  .modal-overlay.active .tribute-modal {
+    transform: scale(1);
+  }
+
+  .btn-close-modal {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-close-modal:hover {
+    background: var(--ruby-soft);
+    color: var(--ruby);
+    border-color: var(--rose-petal);
+  }
+
+  .modal-certificate-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1.5px dashed rgba(212, 175, 55, 0.4);
+    margin-bottom: 24px;
+  }
+
+  .modal-badge {
+    display: inline-block;
+    padding: 4px 18px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  /* Dual Honor Block in Modal */
+  .modal-dual-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  @media (min-width: 600px) {
+    .modal-dual-box {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .modal-honor-panel {
+    background: #fff;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .modal-honor-panel.teacher {
+    border-left: 4px solid var(--gold);
+    background: #fffdf8;
+  }
+  .modal-honor-panel.author {
+    border-left: 4px solid var(--ruby);
+    background: #fff8f9;
+  }
+
+  .modal-honor-tag {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .modal-honor-tag.t-tag { color: var(--gold-deep); }
+  .modal-honor-tag.a-tag { color: var(--ruby); }
+
+  .modal-person-name {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .modal-person-desc {
+    font-size: 12.5px;
+    color: var(--ink-light);
+  }
+
+  .modal-teacher-avatar-wrap {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 4px;
+    background: var(--gold-gradient);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4), var(--gold-glow);
+    flex-shrink: 0;
+  }
+  .modal-teacher-avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .modal-teacher-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .modal-teacher-avatar-inner svg {
+    width: 60%;
+    height: 60%;
+    color: var(--ruby-deep);
+  }
+
+  .modal-author-avatar-wrap {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 4px;
+    background: var(--rose-gradient);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.3);
+    flex-shrink: 0;
+  }
+  .modal-author-avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .modal-author-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .modal-author-avatar-inner svg {
+    width: 60%;
+    height: 60%;
+    color: var(--ruby);
+  }
+
+  .modal-quote-box {
+    background: linear-gradient(135deg, rgba(254, 249, 231, 0.8) 0%, rgba(255, 240, 243, 0.8) 100%);
+    border-left: 4px solid var(--ruby);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 22px;
+  }
+
+  .modal-quote-box p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 16.5px;
+    color: #332104;
+    line-height: 1.6;
+  }
+
+  .modal-article-title {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--ruby-deep);
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  .modal-article-body {
+    font-size: 16.5px;
+    color: #242f40;
+    line-height: 1.95;
+    margin-bottom: 32px;
+    text-align: justify;
+    letter-spacing: 0.1px;
+    word-break: break-word;
+  }
+
+  .story-paragraph {
+    margin: 0 0 18px 0;
+    text-indent: 1.5em;
+    line-height: 1.95;
+  }
+
+  .story-dedication {
+    font-style: italic;
+    color: var(--ruby);
+    text-align: center;
+    margin: 0 0 24px 0;
+    font-size: 15.5px;
+  }
+
+  .story-quote {
+    margin: 22px 0;
+    padding: 14px 20px;
+    background: rgba(212, 175, 55, 0.08);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    font-style: italic;
+    color: #1a202c;
+    line-height: 1.85;
+    font-family: var(--font-serif);
+    font-size: 16.5px;
+  }
+
+  .story-poem-block {
+    margin: 26px auto;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(254, 243, 199, 0.4) 0%, rgba(255, 255, 255, 0.7) 100%);
+    border: 1px dashed rgba(212, 175, 55, 0.6);
+    border-radius: 12px;
+    max-width: 580px;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--ruby-deep);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.08);
+  }
+
+  .story-poem-stanza {
+    margin-bottom: 16px;
+    line-height: 1.85;
+  }
+
+  .story-poem-stanza:last-child {
+    margin-bottom: 0;
+  }
+
+  .story-photo-caption {
+    margin: 20px 0;
+    padding: 12px 18px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14.5px;
+    color: #475569;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .story-caption-badge {
+    display: inline-block;
+    background: var(--ruby);
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 600;
+    font-style: normal;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+
+  .story-signoff {
+    text-align: right;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin: 24px 0 12px 0;
+    font-size: 15.5px;
+    font-family: var(--font-serif);
+  }
+
+  .modal-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  /* Floating Particle / Fountain Effect */
+  .flying-reaction {
+    position: fixed;
+    pointer-events: none;
+    z-index: 10001;
+    font-size: 26px;
+    line-height: 1;
+    animation: particleFly var(--anim-duration, 1.2s) cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  }
+
+  @keyframes particleFly {
+    0% {
+      transform: translate(-50%, 0) scale(0.5) rotate(0deg);
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(calc(-50% + var(--dx, 0px)), var(--dy, -140px)) scale(var(--target-scale, 1.3)) rotate(var(--rot, 20deg));
+      opacity: 0;
+    }
+  }
+
+  /* Floating +1 Toast Indicator */
+  .reaction-plus-toast {
+    position: fixed;
+    pointer-events: none;
+    z-index: 10002;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--ruby-deep);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(230, 57, 70, 0.3);
+    border-radius: 999px;
+    padding: 2px 8px;
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.18);
+    animation: toastFloatUp 0.8s ease-out forwards;
+  }
+
+  @keyframes toastFloatUp {
+    0% { transform: translate(-50%, 0) scale(0.7); opacity: 0; }
+    30% { transform: translate(-50%, -15px) scale(1.1); opacity: 1; }
+    80% { transform: translate(-50%, -35px) scale(1); opacity: 0.9; }
+    100% { transform: translate(-50%, -50px) scale(0.8); opacity: 0; }
+  }
+
+  /* Footer */
+  footer.site-footer {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, #fff2f5 100%);
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 50px 24px 40px;
+    text-align: center;
+  }
+
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Tên TRƯỜNG ĐẠI HỌC Y HÀ NỘI ở footer nổi bật với font sans và sắc đỏ hồng quý phái đồng bộ với header */
+  .footer-logo {
+    font-family: var(--font-sans);
+    font-size: clamp(17px, 2.4vw, 21px);
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #e63946;
+    margin-bottom: 8px;
+    text-shadow: 0 1px 2px rgba(230, 57, 70, 0.15);
+  }
+
+  @supports (-webkit-background-clip: text) or (background-clip: text) {
+    .footer-logo {
+      background: linear-gradient(135deg, #c81d3e 0%, #e63946 50%, #ff3366 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      filter: drop-shadow(0 2px 8px rgba(230, 57, 70, 0.22));
+    }
+  }
+
+  .footer-sub {
+    font-size: 13.5px;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  .footer-dedication {
+    font-family: var(--font-script);
+    font-size: 30px;
+    color: var(--gold-deep);
+    margin-bottom: 20px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+
+  /* Print Stylesheet */
+  @media print {
+    #petal-canvas, header.site-header, .filter-bar-container, .spotlight-card, .wishes-section, footer.site-footer {
+      display: none !important;
+    }
+    body { background: #fff !important; }
+    .awards-grid { display: block !important; }
+    .award-card { page-break-inside: avoid; margin-bottom: 30px; border: 2px solid #000; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Canvas Hiệu Ứng Cánh Hoa Bay Nhẹ Nhàng -->
+<canvas id="petal-canvas"></canvas>
+
+<!-- Header & Điều Khiển Tiện Ích -->
+<header class="site-header">
+  <div class="nav-container">
+    <a href="#" class="brand-group">
+      <div class="emblem" id="site-brand-emblem">
+        <div class="emblem-inner" id="site-brand-inner">
+          <img id="site-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/7/79/Yhanoi.jpg" alt="Logo Đại học Y Hà Nội" class="site-brand-logo" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+          <span style="display:none; font-size:22px;">⚕️</span>
+        </div>
+      </div>
+      <div class="brand-text">
+        <h1>TRƯỜNG ĐẠI HỌC Y HÀ NỘI</h1>
+        <p>Công Bố Giải Thưởng Cuộc Thi "Tri Ân Người Truyền Lửa" • Kỷ Niệm Ngày Nhà Giáo Việt Nam 20/11</p>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <span class="badge-2010">🎉 Chào Mừng 20/11</span>
+      <button class="btn-icon" id="btn-toggle-music" title="Bật/Tắt Giai Điệu Tri Ân">
+        <span id="music-icon">🎵</span>
+      </button>
+      <button class="btn-icon active" id="btn-toggle-petals" title="Bật/Tắt Cánh Hoa Bay">
+        <span>🌸</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <span>✨ CUỘC THI "TRI ÂN NGƯỜI TRUYỀN LỬA" • NGÀY NHÀ GIÁO VIỆT NAM 20/11 ✨</span>
+    </div>
+    <h2 class="hero-title">
+      CÔNG BỐ GIẢI THƯỞNG CUỘC THI<br>
+      <span class="gold-text">"TRI ÂN NGƯỜI TRUYỀN LỬA"</span>
+    </h2>
+
+    <!-- Dual Mission Highlight -->
+    <div class="dual-mission-banner">
+      <div class="mission-card">
+        <div class="mission-icon author">✍️</div>
+        <div class="mission-info">
+          <h3>Cuộc Thi "Tri Ân Người Truyền Lửa"</h3>
+          <p>Tuyên dương các tác giả (học trò, bác sĩ trẻ, sinh viên) đã đoạt giải với những bài viết tri ân sâu sắc, lay động lòng người.</p>
+        </div>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon teacher">👩‍🏫</div>
+        <div class="mission-info">
+          <h3>Tôn Vinh Những Người Truyền Lửa Kính Yêu</h3>
+          <p>Tôn vinh trang trọng các Thầy Cô giáo được khắc họa trong tác phẩm — những ngọn hải đăng y đức cao quý, xứng đáng như nhau.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-quote-poem">
+      "Mỗi bài dự thi là một đóa hoa thơm ngát dâng lên bục giảng.<br>
+      Nơi bệnh viện hay giảng đường, mọi cống hiến của Thầy Cô đều thiêng liêng và sáng ngời như nhau."
+    </div>
+
+    <div class="hero-cta">
+      <a href="#spotlight-section" class="btn-primary">🌟 Khám Phá Trình Chiếu Vinh Danh</a>
+      <a href="#gallery" class="btn-secondary">📜 Xem Toàn Bộ Giải Thưởng & Tác Giả</a>
+      <a href="#wishes" class="btn-secondary">💐 Gửi Lời Tri Ân 20/11</a>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-num" id="stat-teachers-count">13</div>
+        <div class="stat-label">Thầy Cô Được Tri Ân</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-authors-count">11</div>
+        <div class="stat-label">Tác Giả Xuất Sắc Đoạt Giải</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-categories-count">05</div>
+        <div class="stat-label">Hạng Mục Trao Giải</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="total-wishes-stat">2,024+</div>
+        <div class="stat-label">Đóa Hoa Tri Ân 20/11</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sân Khấu Trình Chiếu Spotlight Tự Động (10s) -->
+  <section id="spotlight-section" class="spotlight-card">
+    <div class="spotlight-header">
+      <div class="spotlight-title-group">
+        <span class="pulse-indicator" id="spotlight-pulse"></span>
+        <strong style="font-size:14px; color:var(--ruby-deep);" id="spotlight-status-label">Trình Chiếu Vinh Danh Song Hành</strong>
+        <span style="font-size:12.5px; color:var(--ink-muted);" id="spotlight-timer-text">(Tự động chuyển sau 10s)</span>
+      </div>
+      <div class="spotlight-controls">
+        <button class="btn-icon" id="btn-spotlight-prev" title="Bài trước">‹</button>
+        <button class="btn-icon" id="btn-spotlight-toggle" title="Tạm dừng / Tiếp tục">⏸</button>
+        <button class="btn-icon" id="btn-spotlight-next" title="Bài kế tiếp">›</button>
+      </div>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar-fill" id="spotlight-progress"></div>
+    </div>
+
+    <div class="spotlight-body" id="spotlight-content">
+      <!-- Được render động bằng Javascript với đầy đủ Thầy/Cô & Tác giả đoạt giải -->
+    </div>
+  </section>
+
+  <!-- Bảng Vàng Toàn Bộ Giải Thưởng (Tất Cả Thầy Cô Bình Đẳng) -->
+  <section id="gallery">
+    <div class="section-title-wrap">
+      <span class="section-badge">BẢNG VÀNG DANH DỰ</span>
+      <h3 class="section-title">Vườn Hoa Tri Ân & Tác Giả Đoạt Giải</h3>
+      <p class="section-desc">Mọi người Thầy, người Cô và mọi tác phẩm dự thi đều mang giá trị nhân văn cao quý, được tôn vinh trọn vẹn và trang trọng như nhau.</p>
+    </div>
+
+    <div id="sheet-sync-container" style="display:none; justify-content:center; align-items:center; gap:10px; margin:0 0 18px; flex-wrap:wrap; font-size:13px; color:var(--ink-muted);">
+      <span id="sheet-sync-dot" style="width:8px; height:8px; border-radius:50%; background:#eab308; display:inline-block; margin-right:6px;"></span><span id="sheet-sync-status" role="status" aria-live="polite">Đang tải dữ liệu từ Google Sheet...</span>
+      <button id="btn-retry-sheet-data" type="button" class="btn-primary" style="display:none; padding:6px 12px; font-size:12px;">Thử lại</button>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="filter-bar-container">
+      <div class="filter-tabs" id="filter-tabs">
+        <button class="filter-tab active" data-filter="all">Tất Cả (13)</button>
+        <button class="filter-tab" data-filter="nhat">Giải Nhất (1)</button>
+        <button class="filter-tab" data-filter="nhi">Giải Nhì (2)</button>
+        <button class="filter-tab" data-filter="ba">Giải Ba (4)</button>
+        <button class="filter-tab" data-filter="khuyen-khich">Giải Khuyến khích (6)</button>
+      </div>
+
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" id="search-input" placeholder="Tìm tên thầy cô, tác giả, bộ môn...">
+      </div>
+    </div>
+
+    <!-- Awards Grid: Hiển thị đồng đẳng, không phân chia bậc thang -->
+    <div class="awards-grid" id="awards-grid">
+      <!-- Các thẻ Bằng khen được JS render -->
+    </div>
+  </section>
+
+  <!-- Tường Hoa Tri Ân 20/11 (Guestbook) -->
+  <section id="wishes" class="wishes-section">
+    <div class="section-title-wrap" style="margin-top:0;">
+      <span class="section-badge">GẮN KẾT YÊU THƯƠNG</span>
+      <h3 class="section-title">Tường Hoa Tri Ân 20/11</h3>
+      <p style="color:var(--ink-light); font-size:14px; margin-top:8px;">Gửi gắm đóa hoa tươi thắm và lời chúc chân thành nhất tới các Thầy/Cô kính mến</p>
+    </div>
+
+    <div class="wishes-grid-layout">
+      <!-- Form gửi lời chúc -->
+      <div class="wishes-form">
+        <h3>Gửi Lời Tri Ân</h3>
+        <p>Lời chúc của bạn sẽ được lưu giữ trang trọng trên Tường hoa nhà trường.</p>
+        
+        <form id="wish-form">
+          <!-- Honeypot bảo vệ chống spam bot tự động -->
+          <div style="display:none !important; position:absolute; left:-9999px;" aria-hidden="true">
+            <input type="text" id="form-website-trap" name="website" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="author-name">Họ và tên người gửi:</label>
+            <input type="text" id="author-name" class="form-control" placeholder="VD: BS. Nguyễn Văn An (BSNT K46)" required>
+          </div>
+
+          <div class="form-group">
+            <label for="recipient-teacher">Kính gửi Thầy/Cô:</label>
+            <select id="recipient-teacher" class="form-control">
+              <option value="Tất cả các Thầy Cô giáo">Kính gửi Tất cả các Thầy Cô giáo</option>
+              <!-- Danh sách thầy cô sẽ được inject -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Chọn loài hoa tặng:</label>
+            <div class="flower-choice-group" id="flower-choices">
+              <div class="flower-option selected" data-flower="🌹 Hoa Hồng">🌹 Hoa Hồng</div>
+              <div class="flower-option" data-flower="🌻 Hướng Dương">🌻 Hướng Dương</div>
+              <div class="flower-option" data-flower="🪷 Hoa Sen">🪷 Hoa Sen</div>
+              <div class="flower-option" data-flower="🌼 Cúc Họa Mi">🌼 Cúc Họa Mi</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="wish-message">Lời chúc & Lòng tri ân:</label>
+            <textarea id="wish-message" class="form-control" rows="3" placeholder="Nhân ngày Nhà giáo Việt Nam 20/11, kính chúc Thầy/Cô luôn mạnh khỏe, hạnh phúc..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+            💐 Tặng Hoa & Lời Chúc
+          </button>
+        </form>
+      </div>
+
+      <!-- Cột Danh Sách 10 Lời Chúc Chạy Random -->
+      <div class="wishes-display-column">
+        <div class="wishes-display-header">
+          <div class="wishes-display-title">
+            <span class="pulse-indicator"></span>
+            <span>Bảng 10 Lời Tri Ân (Tự Động Đổi Ngẫu Nhiên)</span>
+          </div>
+          <div class="wishes-controls">
+            <button type="button" class="btn-shuffle-wishes" id="btn-shuffle-wishes" title="Lấy 10 lời chúc ngẫu nhiên khác">
+              🎲 Đổi 10 Lời Chúc
+            </button>
+            <button type="button" class="btn-shuffle-wishes" id="btn-toggle-auto-wishes" title="Tạm dừng / Tiếp tục tự động đổi">
+              ⏸ Tự Động
+            </button>
+          </div>
+        </div>
+
+        <div class="wishes-list-container" id="wishes-list">
+          <!-- 10 thẻ lời chúc được JS render và luân chuyển ngẫu nhiên -->
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-logo">TRƯỜNG ĐẠI HỌC Y HÀ NỘI</div>
+    <p class="footer-sub">Chương trình Cuộc Thi "Tri Ân Người Truyền Lửa" • Tôn Vinh Y Đức & Sự Nghiệp Trồng Người</p>
+    <div class="footer-dedication">"Tôn sư trọng đạo — Uống nước nhớ nguồn"</div>
+    <p class="footer-copy">© 2026 Đại học Y Hà Nội. Giao diện trang trọng chào mừng Ngày Nhà Giáo Việt Nam 20/11.</p>
+  </div>
+</footer>
+
+<!-- Modal Bức Thư Kỷ Yếu Tri Ân Song Hành -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="tribute-modal" role="dialog" aria-modal="true">
+    <button class="btn-close-modal" id="btn-close-modal" aria-label="Đóng">✕</button>
+    
+    <div class="corner-ornament corner-tl"></div>
+    <div class="corner-ornament corner-tr"></div>
+    <div class="corner-ornament corner-bl"></div>
+    <div class="corner-ornament corner-br"></div>
+
+    <div class="modal-certificate-header">
+      <span class="modal-badge" id="modal-badge">CUỘC THI "TRI ÂN NGƯỜI TRUYỀN LỬA"</span>
+      <h3 class="modal-article-title" id="modal-article-title" style="margin-bottom:6px;">Tiêu đề bài viết</h3>
+      <p style="font-size:13px; color:var(--ink-light);" id="modal-subtitle">Cuộc thi "Tri ân người truyền lửa" • Trường Đại học Y Hà Nội</p>
+    </div>
+
+    <!-- Khối Tôn Vinh Song Hành (Thầy/Cô & Tác giả) -->
+    <div class="modal-dual-box">
+      <div class="modal-honor-panel teacher">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div class="modal-teacher-avatar-wrap">
+            <div class="modal-teacher-avatar-inner" id="modal-teacher-avatar">
+              <!-- Ảnh chân dung hoặc avatar SVG render động bằng JS -->
+            </div>
+          </div>
+          <div>
+            <span class="modal-honor-tag t-tag" id="modal-teacher-honor-tag">NGƯỜI ĐƯỢC TÔN VINH</span>
+            <h4 class="modal-person-name" id="modal-teacher-name">Tên Thầy Cô</h4>
+            <p class="modal-person-desc" id="modal-teacher-org">Bộ môn</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-honor-panel author">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div class="modal-author-avatar-wrap">
+            <div class="modal-author-avatar-inner" id="modal-author-avatar">
+              <!-- Ảnh chân dung hoặc avatar SVG tác giả render động bằng JS -->
+            </div>
+          </div>
+          <div>
+            <span class="modal-honor-tag a-tag">✍️ TÁC GIẢ BÀI VIẾT ĐOẠT GIẢI</span>
+            <h4 class="modal-person-name" id="modal-author-name">Tên Tác Giả</h4>
+            <p class="modal-person-desc" id="modal-author-role">Đơn vị / Chức vụ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-quote-box">
+      <p id="modal-quote-text">"Trích dẫn cảm động của thầy cô..."</p>
+    </div>
+
+    <h4 style="font-family:var(--font-serif); font-size:18px; color:var(--ruby-deep); margin-bottom:10px;">Toàn văn tác phẩm dự thi:</h4>
+    <div class="modal-article-body" id="modal-article-body">
+      Toàn văn bài viết dự thi cảm động...
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="window.print()">🖨️ In Bằng Tri Ân Kỷ Niệm</button>
+      <button class="btn-reaction" id="btn-modal-send-heart" style="padding:8px 16px; font-size:13.5px;">❤️ Thả Tim <span class="count" id="modal-heart-count">0</span></button>
+      <button class="btn-primary" id="btn-modal-send-flower" style="padding:8px 16px; font-size:13.5px;">💐 Tặng Hoa <span class="count" id="modal-flower-count">0</span></button>
+    </div>
+  </div>
+</div>
+
+<script id="tribute-core">
+(function() {
+  function safeImageUrl(url) {
+    if (!url || typeof url !== 'string') return '';
+    var m = url.match(/^https:\/\/([^\/@?#:]+)(?::\d+)?(\/[^?#]*)?(\?[^#]*)?(#.*)?$/);
+    if (!m) return '';
+    var host = m[1].toLowerCase();
+    var allowedHosts = [
+      'images.unsplash.com',
+      'drive.google.com',
+      'lh3.googleusercontent.com',
+      'lh4.googleusercontent.com',
+      'lh5.googleusercontent.com',
+      'lh6.googleusercontent.com',
+      'googleusercontent.com',
+      'hmu.edu.vn'
+    ];
+    var isAllowed = allowedHosts.some(function(h) {
+      return host === h || host.endsWith('.' + h);
+    });
+    if (!isAllowed) return '';
+    if (host === 'drive.google.com') {
+      var fileMatch = url.match(/\/file\/d\/([A-Za-z0-9_-]+)/) || url.match(/[?&]id=([A-Za-z0-9_-]+)/);
+      if (fileMatch && fileMatch[1]) {
+        return 'https://drive.google.com/thumbnail?id=' + fileMatch[1] + '&sz=w800';
+      }
+    }
+    return url;
+  }
+
+  function normalizeSearch(str) {
+    if (!str || typeof str !== 'string') return '';
+    var s = str.trim().toLowerCase();
+    s = s.replace(/[\xE0\xE1\u1EA1\u1EA3\xE3\xE2\u1EA7\u1EA5\u1EAD\u1EA9\u1EAB\u0103\u1EB1\u1EAF\u1EB7\u1EB3\u1EB5]/g, 'a');
+    s = s.replace(/[\xE8\xE9\u1EB9\u1EBB\u1EBD\xEA\u1EC1\u1EBF\u1EC7\u1EC3\u1EC5]/g, 'e');
+    s = s.replace(/[\xEC\xED\u1ECB\u1EC9\u0129]/g, 'i');
+    s = s.replace(/[\xF2\xF3\u1ECD\u1ECF\xF5\xF4\u1ED3\u1ED1\u1ED9\u1ED5\u1ED7\u01A1\u1EDD\u1EDB\u1EE3\u1EDF\u1EE1]/g, 'o');
+    s = s.replace(/[\xF9\xFA\u1EE5\u1EE7\u0169\u01B0\u1EEB\u1EE9\u1EF1\u1EED\u1EEF]/g, 'u');
+    s = s.replace(/[\u1EF3\xFD\u1EF5\u1EF7\u1EF9]/g, 'y');
+    s = s.replace(/[\u0111]/g, 'd');
+    s = s.replace(/\s+/g, ' ');
+    return s;
+  }
+
+  function matchesSearch(teacher, query) {
+    if (!query) return true;
+    var normQ = normalizeSearch(query);
+    if (!normQ) return true;
+    var fields = [teacher.name, teacher.org, teacher.author, teacher.title, teacher.catLabel, teacher.excerpt];
+    return fields.some(function(f) {
+      return f && normalizeSearch(String(f)).indexOf(normQ) !== -1;
+    });
+  }
+
+  function publicWishes(source) {
+    if (!Array.isArray(source)) return [];
+    return source.filter(function(w) {
+      return w && w.status === 'APPROVED';
+    });
+  }
+
+  function normalizeTeachers(source) {
+    if (!Array.isArray(source)) return [];
+    var seen = new Set();
+    return source.filter(function(item) {
+      if (!item) return false;
+      var id = item.id !== undefined && item.id !== null ? String(item.id).trim() : '';
+      if (!id || seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+  }
+
+  function deriveStats(records) {
+    var valid = normalizeTeachers(records);
+    var total = valid.length;
+    var categories = {};
+    var categoryTotal = 0;
+    for (var i = 0; i < valid.length; i++) {
+      var cat = valid[i].cat || 'other';
+      categories[cat] = (categories[cat] || 0) + 1;
+      categoryTotal++;
+    }
+    return {
+      total: total,
+      categories: categories,
+      categoryTotal: categoryTotal
+    };
+  }
+
+  function toAsciiJson(obj) {
+    var json = JSON.stringify(obj);
+    return json.replace(/[\u007F-\uFFFF]/g, function(c) {
+      return '\\u' + ('0000' + c.charCodeAt(0).toString(16).toUpperCase()).slice(-4);
+    });
+  }
+
+  window.TributeCore = {
+    safeImageUrl: safeImageUrl,
+    deriveStats: deriveStats,
+    normalizeSearch: normalizeSearch,
+    matchesSearch: matchesSearch,
+    publicWishes: publicWishes,
+    normalizeTeachers: normalizeTeachers,
+    toAsciiJson: toAsciiJson
+  };
+})();
+</script>
+
+<script>
+(function() {
+  // CẤU HÌNH DATABASE GOOGLE SHEETS
+  const GOOGLE_SHEET_CONFIG = {
+    // Thay bằng URL /exec của Web App đang hoạt động sau khi deploy.
+    webAppUrl: 'https://script.google.com/macros/s/AKfycbxRmZP_yCLe93q3sLDYnpumMTC0Lc1q7DX8sftL9kePjuzv-7C-9yZS1YCuhb0YU9b2/exec'
+  };
+
+  function getConfiguredAppsScriptUrl() {
+    const url = String(GOOGLE_SHEET_CONFIG.webAppUrl || '').trim();
+    return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url) ? url : '';
+  }
+
+
+  // Helper bảo mật: Chống XSS an toàn tuyệt đối
+  function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Helper bảo mật: Chống Formula Injection vào Google Sheets
+  function sanitizeFormula(str) {
+    if (!str) return '';
+    if (/^[=+\-@\t\r]/.test(str)) {
+      return "'" + str;
+    }
+    return str;
+  }
+
+  // Nội dung vinh danh chỉ được nạp từ Apps Script bootstrap.
+  const DATA = [];
+
+  // Helper chuyển đổi URL ảnh an toàn & tối ưu hiệu năng (chống javascript: URI, hỗ trợ Google Drive)
+  function formatImageUrl(url) {
+    if (!url || typeof url !== 'string') return '';
+    url = url.trim();
+    if (!url) return '';
+    // Chỉ cho phép giao thức http, https hoặc data:image
+    if (!/^(https?:\/\/|data:image\/)/i.test(url)) return '';
+    const driveFileMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveFileMatch && driveFileMatch[1]) {
+      return `https://drive.google.com/thumbnail?id=${driveFileMatch[1]}&sz=w800`;
+    }
+    const driveIdMatch = url.match(/drive\.google\.com\/(?:open|uc)\?.*id=([a-zA-Z0-9_-]+)/);
+    if (driveIdMatch && driveIdMatch[1]) {
+      return `https://drive.google.com/thumbnail?id=${driveIdMatch[1]}&sz=w800`;
+    }
+    return url;
+  }
+
+  function isFemaleTeacher(gender) {
+    const normalized = String(gender || '').trim().toLowerCase();
+    return normalized === 'female' || normalized === 'nữ';
+  }
+
+  function getTeacherHonorific(gender) {
+    return isFemaleTeacher(gender) ? 'Người Cô' : 'Người thầy';
+  }
+
+  function getTeacherHonorificEmoji(gender) {
+    return isFemaleTeacher(gender) ? '👩‍🏫' : '👨‍🏫';
+  }
+
+  // Helper tạo SVG Avatar Thầy / Cô khi chưa có ảnh
+  function getAvatarSvg(gender) {
+    if (isFemaleTeacher(gender)) {
+      return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 00-5 5v1a5 5 0 0010 0V7a5 5 0 00-5-5zm0 12c-4 0-7 2.2-7 5v1h14v-1c0-2.8-3-5-7-5z"/></svg>';
+    }
+    return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a5 5 0 105 5 5 5 0 00-5-5zm0 12c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5z"/></svg>';
+  }
+
+  // Helper render ảnh Thầy Cô (lazy loading, decoding async, escape src)
+  function renderTeacherAvatarHtml(photoUrl, gender, customClass = 'card-teacher-photo') {
+    const formatted = formatImageUrl(photoUrl);
+    if (formatted) {
+      const safeSrc = formatted.replace(/"/g, '&quot;');
+      const safeGender = isFemaleTeacher(gender) ? 'female' : 'male';
+      return `<img src="${safeSrc}" alt="${getTeacherHonorific(gender)}" class="${customClass}" loading="lazy" decoding="async" onerror="this.onerror=null; this.parentElement.innerHTML=getAvatarSvg('${safeGender}');">`;
+    }
+    return getAvatarSvg(gender);
+  }
+
+  // Helper tạo SVG Avatar Tác Giả viết bài khi chưa có ảnh
+  function getAuthorAvatarSvg() {
+    return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>';
+  }
+
+  // Helper render ảnh Tác Giả (lazy loading, decoding async, escape src)
+  function renderAuthorAvatarHtml(photoUrl, customClass = 'card-author-photo') {
+    const formatted = formatImageUrl(photoUrl);
+    if (formatted) {
+      const safeSrc = formatted.replace(/"/g, '&quot;');
+      return `<img src="${safeSrc}" alt="Chân dung Tác giả" class="${customClass}" loading="lazy" decoding="async" onerror="this.onerror=null; this.parentElement.innerHTML=getAuthorAvatarSvg();">`;
+    }
+    return getAuthorAvatarSvg();
+  }
+
+  // Cập nhật logo trường ở Header
+  function applySiteLogo(logoUrl) {
+    const formatted = formatImageUrl(logoUrl);
+    if (!formatted) return;
+    const imgEl = document.getElementById('site-logo-img');
+    if (imgEl) {
+      imgEl.src = formatted;
+      imgEl.style.display = 'block';
+      const iconSpan = imgEl.nextElementSibling;
+      if (iconSpan) iconSpan.style.display = 'none';
+    }
+  }
+
+  // Quản lý Reactions (Hoa & Tim) lấy từ Datasheet + tương tác người dùng
+  const HEART_ICONS = ['❤️', '💖', '💕', '💗', '💓', '✨', '🥰'];
+  const FLOWER_ICONS = ['💐', '🌸', '🌺', '🌷', '🌹', '🌼', '✨'];
+
+  function playReactionSound(type) {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    try {
+      const now = audioCtx.currentTime;
+      if (type === 'heart') {
+        playNote(523.25, now, 0.3);        // C5
+        playNote(659.25, now + 0.08, 0.4); // E5
+      } else {
+        playNote(587.33, now, 0.25);       // D5
+        playNote(739.99, now + 0.07, 0.3); // F#5
+        playNote(880.00, now + 0.14, 0.45);// A5
+      }
+    } catch(e) {}
+  }
+
+  function getReactionCount(id, type) {
+    id = parseInt(id, 10);
+    const item = DATA.find(x => parseInt(x.id, 10) === id);
+    const keyProp = type === 'heart' ? 'hearts' : 'flowers';
+    const baseCount = (item && typeof item[keyProp] === 'number') ? item[keyProp] : 100;
+    const userAdded = parseInt(localStorage.getItem(`tribute_user_added_${id}_${type}`) || '0', 10);
+    return baseCount + userAdded;
+  }
+  window.getReactionCount = getReactionCount;
+
+  function incReaction(id, type, btnEl) {
+    id = parseInt(id, 10);
+    if (!id || isNaN(id)) {
+      if (typeof currentModalTeacherId !== 'undefined' && currentModalTeacherId) {
+        id = parseInt(currentModalTeacherId, 10);
+      } else {
+        id = 1;
+      }
+    }
+
+    const userKey = `tribute_user_added_${id}_${type}`;
+    const userAdded = parseInt(localStorage.getItem(userKey) || '0', 10) + 1;
+    localStorage.setItem(userKey, userAdded);
+    
+    const newCount = getReactionCount(id, type);
+
+    // Cập nhật ngay trên nút được bấm
+    if (btnEl) {
+      const cnt = btnEl.querySelector('.count');
+      if (cnt) {
+        cnt.textContent = newCount;
+        cnt.classList.add('pop-number');
+        setTimeout(() => cnt.classList.remove('pop-number'), 400);
+      }
+    }
+
+    // Cập nhật số trên tất cả các vị trí hiển thị (Bảng vàng, Spotlight, Modal)
+    updateReactionDisplays(id, type, newCount);
+
+    // Kích hoạt hiệu ứng bùng nổ hoa / tim rực rỡ
+    triggerReactionBurst(btnEl, type);
+  }
+  window.incReaction = incReaction;
+
+  function updateReactionDisplays(id, type, count) {
+    id = parseInt(id, 10);
+
+    // 1. Thẻ Bảng Vàng
+    document.querySelectorAll(`.reaction-count-${id}-${type}`).forEach(el => {
+      el.textContent = count;
+      el.classList.add('pop-number');
+      setTimeout(() => el.classList.remove('pop-number'), 400);
+    });
+
+    // 2. Spotlight nếu đang chiếu đúng bài này
+    if (DATA[spotIndex] && parseInt(DATA[spotIndex].id, 10) === id) {
+      const spotEl = document.querySelector(`.spotlight-count-${type}`);
+      if (spotEl) {
+        spotEl.textContent = count;
+        spotEl.classList.add('pop-number');
+        setTimeout(() => spotEl.classList.remove('pop-number'), 400);
+      }
+    }
+
+    // 3. Modal nếu đang mở đúng bài này
+    if (typeof currentModalTeacherId !== 'undefined' && parseInt(currentModalTeacherId, 10) === id) {
+      const modalEl = document.getElementById(`modal-${type}-count`);
+      if (modalEl) {
+        modalEl.textContent = count;
+        modalEl.classList.add('pop-number');
+        setTimeout(() => modalEl.classList.remove('pop-number'), 400);
+      }
+    }
+  }
+
+  function triggerReactionBurst(targetEl, type) {
+    let centerX = window.innerWidth / 2;
+    let centerY = window.innerHeight / 2;
+
+    if (targetEl && targetEl.getBoundingClientRect) {
+      const rect = targetEl.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        centerX = rect.left + rect.width / 2;
+        centerY = rect.top;
+      }
+      targetEl.classList.remove('pop-bounce');
+      void targetEl.offsetWidth; // reflow
+      targetEl.classList.add('pop-bounce');
+      setTimeout(() => targetEl.classList.remove('pop-bounce'), 500);
+    }
+
+    // Bật chùm 7-9 hoa / tim bay vút lên
+    const iconPool = type === 'heart' ? HEART_ICONS : FLOWER_ICONS;
+    const particleCount = 8;
+    for (let i = 0; i < particleCount; i++) {
+      const p = document.createElement('div');
+      p.className = 'flying-reaction';
+      p.textContent = iconPool[Math.floor(Math.random() * iconPool.length)];
+
+      const dx = (Math.random() - 0.5) * 140; // bay tỏa sang 2 bên
+      const dy = -(Math.random() * 80 + 90);  // bay vút lên trên
+      const rot = (Math.random() - 0.5) * 70; // xoay nhẹ
+      const targetScale = Math.random() * 0.6 + 1.1;
+      const duration = Math.random() * 0.4 + 0.95;
+
+      p.style.setProperty('--dx', `${dx}px`);
+      p.style.setProperty('--dy', `${dy}px`);
+      p.style.setProperty('--rot', `${rot}deg`);
+      p.style.setProperty('--target-scale', targetScale);
+      p.style.setProperty('--anim-duration', `${duration}s`);
+      p.style.left = centerX + 'px';
+      p.style.top = centerY + 'px';
+
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), duration * 1000 + 100);
+    }
+
+    // Nhãn nổi "+1 ❤️" hoặc "+1 💐"
+    const toast = document.createElement('div');
+    toast.className = 'reaction-plus-toast';
+    toast.textContent = type === 'heart' ? '+1 ❤️' : '+1 💐';
+    toast.style.left = centerX + 'px';
+    toast.style.top = (centerY - 6) + 'px';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 850);
+
+    // Phát âm thanh du dương
+    playReactionSound(type);
+  }
+  window.triggerReactionBurst = triggerReactionBurst;
+
+  // RENDER AWARDS GRID: CÁC THẦY CÔ HIỂN THỊ ĐỒNG ĐẲNG
+  const awardsGridEl = document.getElementById('awards-grid');
+  let currentFilter = 'all';
+  let currentSearch = '';
+  let sheetSyncMessage = 'Đang tải dữ liệu từ Google Sheet...';
+  let teacherSyncInFlight = false;
+  let lastTeacherSyncAttemptAt = 0;
+
+  function renderAwardsGrid() {
+    if (!DATA.length) {
+      awardsGridEl.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 48px 20px; background: rgba(255,255,255,0.7); border-radius: 16px; border: 1px dashed var(--gold); backdrop-filter: blur(4px);">
+          <div style="font-size: 28px; margin-bottom: 10px;">⏳</div>
+          <p style="font-size: 15px; font-weight: 700; color: var(--ruby-deep); margin: 0 0 6px;">Đang tải danh sách bài viết vinh danh từ Google Sheet...</p>
+          <p style="font-size: 13px; color: var(--ink-muted); margin: 0;">Dữ liệu đang được kết nối trực tiếp theo thời gian thực.</p>
+        </div>
+      `;
+      return;
+    }
+    const filtered = DATA.filter(item => {
+      const matchCat = currentFilter === 'all' || item.cat === currentFilter;
+      const matchSearch = !currentSearch || (
+        window.TributeCore && window.TributeCore.matchesSearch
+          ? window.TributeCore.matchesSearch(item, currentSearch)
+          : (
+            (item.name && item.name.toLowerCase().includes(currentSearch)) ||
+            (item.author && item.author.toLowerCase().includes(currentSearch)) ||
+            (item.org && item.org.toLowerCase().includes(currentSearch)) ||
+            (item.title && item.title.toLowerCase().includes(currentSearch))
+          )
+      );
+      return matchCat && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      awardsGridEl.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px; background:#fff; border-radius:16px;">
+          <p style="font-size:18px; color:var(--ink-light);">Không tìm thấy kết quả phù hợp với từ khóa "${currentSearch}".</p>
+        </div>
+      `;
+      return;
+    }
+
+    awardsGridEl.innerHTML = filtered.map(p => {
+      const idx = DATA.findIndex(x => x.id === p.id);
+      const hearts = getReactionCount(p.id, 'heart');
+      const flowers = getReactionCount(p.id, 'flower');
+
+      const safeCat = escapeHtml(p.cat);
+      const safeCatLabel = escapeHtml(p.catLabel);
+      const safeName = escapeHtml(p.name);
+      const safeOrg = escapeHtml(p.org);
+      const safeQuote = escapeHtml(p.quote);
+      const safeAuthor = escapeHtml(p.author);
+      const safeAuthorRole = escapeHtml(p.authorRole || '');
+      const safeTitle = escapeHtml(p.title);
+      const safeExcerpt = escapeHtml(p.excerpt);
+
+      return `
+        <article class="award-card" data-cat="${safeCat}">
+          <div class="corner-ornament corner-tl"></div>
+          <div class="corner-ornament corner-tr"></div>
+          <div class="corner-ornament corner-bl"></div>
+          <div class="corner-ornament corner-br"></div>
+
+          <span class="award-ribbon tag-cat-${safeCat}">${safeCatLabel}</span>
+
+          <div>
+            <!-- Khối 1: Tôn vinh Thầy Cô -->
+            <div class="card-teacher-block">
+              <div class="card-avatar">
+                <div class="card-avatar-inner">
+                  ${renderTeacherAvatarHtml(p.photo, p.gender, 'card-teacher-photo')}
+                </div>
+              </div>
+              <div>
+                <span class="card-teacher-badge">${getTeacherHonorificEmoji(p.gender)} ${getTeacherHonorific(p.gender)} được tri ân</span>
+                <h4 class="card-teacher-name">${safeName}</h4>
+                <p class="card-teacher-org">${safeOrg}</p>
+              </div>
+            </div>
+
+            <div class="card-quote">
+              "${safeQuote}"
+            </div>
+
+            <!-- Khối 2: Tác giả & Tác phẩm đoạt giải -->
+            <div class="card-author-block">
+              <div class="card-author-header">
+                <div class="card-author-avatar">
+                  <div class="card-author-avatar-inner">
+                    ${renderAuthorAvatarHtml(p.authorPhoto, 'card-author-photo')}
+                  </div>
+                </div>
+                <div>
+                  <span style="font-size:11px; font-weight:700; color:var(--ruby-deep); text-transform:uppercase;">✍️ Tác giả </span>
+                  <div class="card-author-name">${safeAuthor}</div>
+                </div>
+              </div>
+              <h5 class="card-article-title">Tác phẩm: "${safeTitle}"</h5>
+              <p class="card-excerpt">${safeExcerpt}</p>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <button class="btn-read-story" onclick="openStoryModal(${idx})">
+              Đọc toàn văn bài thi ➔
+            </button>
+            <div class="interactive-reactions">
+              <button class="btn-reaction" onclick="incReaction(${p.id}, 'heart', this)" title="Thả tim tri ân">
+                <span>❤️</span> <span class="count reaction-count-${p.id}-heart">${hearts}</span>
+              </button>
+              <button class="btn-reaction" onclick="incReaction(${p.id}, 'flower', this)" title="Tặng hoa 20/11">
+                <span>💐</span> <span class="count reaction-count-${p.id}-flower">${flowers}</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  // Filter Buttons Event
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentFilter = tab.dataset.filter;
+      renderAwardsGrid();
+    });
+  });
+
+  // Search Input Event
+  const searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('input', (e) => {
+    currentSearch = e.target.value.trim().toLowerCase();
+    renderAwardsGrid();
+  });
+
+  // SPOTLIGHT PRESENTATION LOGIC (SLIDE CHẠY CHẬM 10 GIÂY = 10000ms)
+  let spotIndex = 0;
+  let spotPlaying = true;
+  let spotProgress = 0;
+  let spotInterval = null;
+  const STEP_MS = 100;
+  const DURATION_MS = 10000; // 10 GIÂY THEO YÊU CẦU
+
+  const spotlightContentEl = document.getElementById('spotlight-content');
+  const spotlightProgressEl = document.getElementById('spotlight-progress');
+  const spotlightPulseEl = document.getElementById('spotlight-pulse');
+  const spotlightToggleBtn = document.getElementById('btn-spotlight-toggle');
+  const spotlightStatusLabel = document.getElementById('spotlight-status-label');
+
+  function renderSpotlightItem(idx) {
+    const p = DATA[idx];
+    if (!p) {
+      spotlightContentEl.textContent = sheetSyncMessage;
+      return;
+    }
+    const hearts = getReactionCount(p.id, 'heart');
+    const flowers = getReactionCount(p.id, 'flower');
+
+    const safeCat = escapeHtml(p.cat);
+    const safeCatLabel = escapeHtml(p.catLabel);
+    const safeName = escapeHtml(p.name);
+    const safeOrg = escapeHtml(p.org);
+    const safeQuote = escapeHtml(p.quote);
+    const safeAuthor = escapeHtml(p.author);
+    const safeAuthorRole = escapeHtml(p.authorRole || '');
+    const safeTitle = escapeHtml(p.title);
+    const safeExcerpt = escapeHtml(p.excerpt || p.full);
+
+    spotlightContentEl.innerHTML = `
+      <div class="spotlight-dual-grid">
+        <!-- Cột Thầy/Cô được tôn vinh -->
+        <div class="spotlight-teacher-col">
+          <div class="spotlight-avatar">
+            <div class="spotlight-avatar-inner">
+              ${renderTeacherAvatarHtml(p.photo, p.gender, 'spotlight-teacher-photo')}
+            </div>
+          </div>
+          <span style="font-size:11px; font-weight:800; color:var(--ruby); text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:4px;">
+            🌟 ${getTeacherHonorific(p.gender).toUpperCase()} ĐƯỢC TÔN VINH
+          </span>
+          <h4 class="spotlight-teacher-name">${safeName}</h4>
+          <p class="spotlight-teacher-org">${safeOrg}</p>
+          <div class="spotlight-author-box">
+            <div class="spotlight-author-avatar">
+              <div class="spotlight-author-avatar-inner">
+                ${renderAuthorAvatarHtml(p.authorPhoto, 'spotlight-author-photo')}
+              </div>
+            </div>
+            <div>
+              <span style="font-size:11px; font-weight:700; color:var(--ruby-deep); display:block;">✍️ TÁC GIẢ BÀI VIẾT:</span>
+              <strong style="font-size:14px; color:var(--ink);">${safeAuthor}</strong>
+              <div style="font-size:11.5px; color:var(--ink-light);">${safeAuthorRole}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột Tác phẩm & Giải thưởng -->
+        <div class="spotlight-article-col">
+          <div class="spotlight-quote-box">
+            <p class="spotlight-quote-text">"${safeQuote}"</p>
+          </div>
+
+          <div>
+            <span class="spotlight-prize-badge tag-cat-${safeCat}">${safeCatLabel} • Cuộc Thi "Tri Ân Người Truyền Lửa"</span>
+            <h3 class="spotlight-article-title">"${safeTitle}"</h3>
+            <p style="font-size:13px; color:var(--gold-deep); font-weight:600; margin-bottom:10px;">
+              Tác giả dự thi: <strong>${safeAuthor}</strong> (${safeAuthorRole})
+            </p>
+            <p class="spotlight-article-p">${safeExcerpt}</p>
+            
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;">
+              <button class="btn-primary" onclick="openStoryModal(${idx})">📜 Đọc Chi Tiết & In Bằng Khen</button>
+              <button class="btn-reaction" onclick="incReaction(${p.id}, 'heart', this)" title="Thả tim tri ân" style="padding:8px 16px; font-size:13.5px;">
+                <span>❤️</span> Thả Tim <span class="count spotlight-count-heart reaction-count-${p.id}-heart">${hearts}</span>
+              </button>
+              <button class="btn-reaction" onclick="incReaction(${p.id}, 'flower', this)" title="Tặng hoa 20/11" style="padding:8px 16px; font-size:13.5px;">
+                <span>💐</span> Tặng Hoa <span class="count spotlight-count-flower reaction-count-${p.id}-flower">${flowers}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function startSpotlight() {
+    if (!DATA.length) return;
+    spotPlaying = true;
+    if (spotlightToggleBtn) spotlightToggleBtn.textContent = '⏸';
+    if (spotlightPulseEl && spotlightPulseEl.classList) spotlightPulseEl.classList.remove('paused');
+    if (spotlightStatusLabel) spotlightStatusLabel.textContent = 'Đang Tự Động Trình Chiếu';
+    
+    if (spotInterval) clearInterval(spotInterval);
+    spotInterval = setInterval(() => {
+      spotProgress += (STEP_MS / DURATION_MS) * 100;
+      if (spotProgress >= 100) {
+        spotProgress = 0;
+        spotIndex = (spotIndex + 1) % DATA.length;
+        renderSpotlightItem(spotIndex);
+      }
+      if (spotlightProgressEl) spotlightProgressEl.style.width = spotProgress + '%';
+    }, STEP_MS);
+  }
+
+  function pauseSpotlight() {
+    spotPlaying = false;
+    if (spotlightToggleBtn) spotlightToggleBtn.textContent = '▶';
+    if (spotlightPulseEl && spotlightPulseEl.classList) spotlightPulseEl.classList.add('paused');
+    if (spotlightStatusLabel) spotlightStatusLabel.textContent = 'Đang Tạm Dừng';
+    clearInterval(spotInterval);
+  }
+
+  spotlightToggleBtn.addEventListener('click', () => {
+    if (spotPlaying) pauseSpotlight();
+    else startSpotlight();
+  });
+
+  document.getElementById('btn-spotlight-prev').addEventListener('click', () => {
+    if (!DATA.length) return;
+    pauseSpotlight();
+    spotProgress = 0;
+    spotIndex = (spotIndex - 1 + DATA.length) % DATA.length;
+    renderSpotlightItem(spotIndex);
+    spotlightProgressEl.style.width = '0%';
+  });
+
+  document.getElementById('btn-spotlight-next').addEventListener('click', () => {
+    if (!DATA.length) return;
+    pauseSpotlight();
+    spotProgress = 0;
+    spotIndex = (spotIndex + 1) % DATA.length;
+    renderSpotlightItem(spotIndex);
+    spotlightProgressEl.style.width = '0%';
+  });
+
+  // MODAL LOGIC SONG HÀNH
+  const modalOverlay = document.getElementById('modal-overlay');
+  const btnCloseModal = document.getElementById('btn-close-modal');
+  let currentModalTeacherId = null;
+
+  function formatStoryBodyHtml(rawText) {
+    if (!rawText || !rawText.trim()) {
+      return '<p class="story-paragraph">Chưa có toàn văn bài viết trong Google Sheet.</p>';
+    }
+
+    let text = rawText.trim();
+    text = text.replace(/^\uFEFF/, '').replace(/<\s*\/?\s*br\s*\/?>/gi, '\n').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+    if (!text.includes('\n')) {
+      const anchors = [
+        "Con đường tôi đi", "Có những đốm lửa đến sớm", "Từ những giờ học của Thầy", "Thế rồi, tôi tìm đến", 
+        "Giữa nhịp làm việc đều đặn", "Sau này nghĩ lại", "Có một kỷ niệm khác", "Lúc đó, tôi hiểu rằng", 
+        "Tôi còn nhớ hình ảnh những ngày cuối năm", "Tôi luôn ghi nhớ lời Thầy dạy", "Có những ngọn lửa không bùng lên", 
+        "Sau cùng, tôi xin gửi", "Dưới mái trường xưa sáng ngời", "Ơn Thầy Cô như biển lớn", "Từng bước trưởng thành theo lời", 
+        "Ngọn lửa tri âm thắp mãi", "Khoác áo blouse, nhớ đạo nghề", "Đứng bục giảng, càng thấm nghĩa", "Xin gửi kính yêu muôn vạn", "Chúc Thầy Cô bình an, sáng", 
+        "Học trò: Lê Thị Hương",
+
+        "Có những người Thầy không chỉ trao truyền", "Hai năm sau khi tốt nghiệp", "Ngày tôi chọn đi trên", 
+        "Chỉ khi thực sự dấn thân", "Em xin cảm ơn Thầy", "Em xin kính chúc Thầy", "Học trò của Thầy,",
+
+        "(Tri ân thầy Bùi Vũ Bình", "Có những người thầy không chỉ dạy ta một nghề", "Tôi bước vào ngành điều dưỡng", 
+        "Chính trong những tháng ngày chông chênh", "Thầy dạy tôi kỹ năng nghề nghiệp", "Thầy cũng là người dẫn dắt tôi đến", 
+        "Nhưng có lẽ, điều lớn nhất", "Với lớp Điều dưỡng Tiên tiến", "Có những lúc, chỉ một câu nói", 
+        "Cuộc thi mang tên “Tri ân", "Nhân dịp cuộc thi này,", "Ảnh 1:", "Ảnh 2:", "Chúng tôi lớn lên trong những năm tháng", 
+        "Chúng tôi đứng bên nhau như cách",
+
+        "Tôi bước vào hành trình Nội trú Lão khoa", "Giữa một rừng hoa các chuyên ngành", "Tôi nhớ lần đầu gặp mặt", 
+        "Tôi nhớ những giờ giao ban", "Và trên hết, tôi nhớ nụ cười", "Giờ đây, khi đã trở thành", 
+        "Nhân ngày Nhà giáo Việt Nam 20/11", "Lão không phải là già đâu", "Vì vẻ đẹp nằm ở sâu tâm hồn", 
+        "Lão vui lão khoẻ trường tồn", "Lão mà không lão,",
+
+        "Trong hành trình ấy, thầy Tuệ", "Là lớp vừa làm vừa học", "Trong những buổi học đầu tiên", 
+        "Thầy thường nói với chúng tôi rằng", "Trong phòng thực hành", "Là người dạy lớp vừa làm vừa học", 
+        "Điều khiến chúng tôi trân trọng nhất", "Có những bài học không nằm trong giáo trình", "Khi khóa học dần khép lại", 
+        "Cuộc thi “Tri ân người truyền lửa” là dịp", "Năm nào trẻ tuổi rập khuôn", "Bước vào lớp học giữa muôn bộn bề", 
+        "Thầy trao bền bỉ say mê", "Ân cần từng bước vỗ về niềm tin", "Ống nghiệm lặng lẽ vô hình", "Thầy dạy giữ trọn chữ “tinh”", 
+        "Sai dù chỉ một nhịp sâu", "Cũng làm chệch hướng nhiệm mầu y khoa", "Ngày dài vừa học vừa qua", "Thầy luôn kiên nhẫn chan hòa", 
+        "Không lời hoa mỹ cao sâu", "Chỉ gieo trách nhiệm bền lâu với nghề", "Trang giấy như được phủ lề", "Bởi bao tâm huyết thầy đề", 
+        "Hôm nay lớp đã vững vàng", "Mang theo ngọn lửa thầy trao", "Y Hà Nội sáng muôn nơi", "Lửa nghề lặng lẽ truyền hoài", 
+        "(Tập thể lớp Xét nghiệm K5B)",
+
+        "Mỗi buổi Thầy đi buồng", "Được học tập dưới sự chỉ dẫn của Thầy", "Trong lĩnh vực chuyên sâu", "Với tôi, đó không chỉ là một câu nói",
+
+        "Ngày chúng tôi đứng trước quyết định", "Những ngày đầu bước vào chuyên ngành", "Càng học với thầy,", "Trong giảng dạy,", 
+        "Nhưng có lẽ bài học sâu sắc nhất", "Những lời dạy ấy đã theo tôi", "Giáo sư Mai Trọng Khoa không chỉ là người", 
+        "Chúng tôi biết rằng,", "Và nếu có ai hỏi tôi rằng",
+
+        "Và chính trong buổi chiều hôm ấy", "Những ngày sau đó,", "Có những lúc chúng tôi không nghĩ", "Không chỉ trong học tập,", 
+        "Trong chuyên môn,", "Nhưng điều làm tôi xúc động nhất", "Với tôi, thầy không chỉ là người", "Trong hành trình làm nghề phía trước", 
+        "Người truyền lửa không nhất thiết phải là",
+
+        "Với tôi, đó là cô Hồ Thị Kim Thanh", "Học cô Hồ Thị Kim Thanh,", "Với cô Nguyễn Thị Thanh Tú,", 
+        "Hai người cô, hai bộ môn rất khác nhau", "Nhiều năm trôi qua,", "Nếu được nói một lời tri ân,", "Và với tôi, như thế là đủ", 
+        "Sài Gòn, tháng 1 năm 2026",
+
+        "Y học hạt nhân từng là một lĩnh vực", "Là một nhà khoa học,", "Những buổi giảng của Giáo sư", "Trong giảng dạy cũng như trong nghiên cứu", 
+        "Đối với thế hệ bác sĩ nội trú chúng tôi", "Cuộc thi “Tri ân người truyền lửa” là dịp", "Ngọn lửa mà thầy thắp lên có thể không",
+
+        "“Chúng ta chỉ đến cuộc đời này", "Tôi gặp thầy trong một buổi sáng", "Cuối giờ tôi chạy theo để hỏi", 
+        "Tôi bắt đầu tìm đến gặp thầy", "Câu \"Chúng ta chỉ đến cuộc đời này", "Rồi tôi sang Pháp học tập", 
+        "“Chúc mừng Hiếu.", "Đó không phải là một lời khen", "Sau khi hoàn thành chương trình tiến sĩ", 
+        "Mỗi lần cầm đuốc chạy mà mệt quá"
+      ];
+
+      for (let i = 0; i < anchors.length; i++) {
+        const a = anchors[i];
+        const escaped = a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        text = text.replace(new RegExp('(\\s+)(' + escaped + ')', 'g'), '\n\n$2');
+      }
+    }
+
+    const rawParagraphs = text.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+    let html = '';
+    let inPoem = false;
+    let poemBuffer = [];
+
+    function flushPoem() {
+      if (poemBuffer.length) {
+        html += '<div class="story-poem-block">' + poemBuffer.map(stanza => '<div class="story-poem-stanza">' + stanza + '</div>').join('') + '</div>';
+        poemBuffer = [];
+      }
+      inPoem = false;
+    }
+
+    for (let i = 0; i < rawParagraphs.length; i++) {
+      const p = rawParagraphs[i];
+      const lines = p.split('\n').map(l => l.trim()).filter(Boolean);
+
+      const isPoemLine = (line) => line.length > 0 && line.length <= 60 && !line.startsWith('Học trò') && !line.startsWith('Ảnh') && !line.startsWith('Sài Gòn');
+      const isPoem = (lines.length >= 2 && lines.every(isPoemLine)) ||
+                     (lines.length === 1 && isPoemLine(lines[0]) && (
+                        p.includes('rập khuôn') || p.includes('Ống nghiệm') || p.includes('chan hòa') || 
+                        p.includes('phủ lề') || p.includes('sáng muôn nơi') || p.includes('trang sách mới') || 
+                        p.includes('áo blouse, nhớ đạo') || p.includes('Lão không phải là già đâu') || 
+                        p.includes('Vì vẻ đẹp nằm ở sâu') || p.includes('Lão vui lão khoẻ') || p.includes('Lão mà không lão')
+                     ));
+
+      if (isPoem) {
+        inPoem = true;
+        poemBuffer.push(lines.map(escapeHtml).join('<br>'));
+        continue;
+      } else {
+        flushPoem();
+      }
+
+      if (p.startsWith('(') && p.endsWith(')')) {
+        html += `<div class="story-dedication">${escapeHtml(p)}</div>`;
+        continue;
+      }
+
+      if ((p.startsWith('“') && p.endsWith('”')) || (p.startsWith('"') && p.endsWith('"')) || p.startsWith('“Chúc mừng Hiếu.')) {
+        html += `<blockquote class="story-quote">${escapeHtml(p)}</blockquote>`;
+        continue;
+      }
+
+      if (p.startsWith('Ảnh 1:') || p.startsWith('Ảnh 2:') || p.startsWith('Ảnh:')) {
+        html += `<div class="story-photo-caption"><span class="story-caption-badge">📸 Kỷ Niệm</span> ${escapeHtml(p)}</div>`;
+        continue;
+      }
+
+      if (p.startsWith('Học trò') || p.startsWith('Sài Gòn,') || p.startsWith('(Tập thể lớp')) {
+        html += `<div class="story-signoff">${escapeHtml(p)}</div>`;
+        continue;
+      }
+
+      html += `<p class="story-paragraph">${escapeHtml(p)}</p>`;
+    }
+
+    flushPoem();
+    return html;
+  }
+
+  window.openStoryModal = function(idx) {
+    const p = DATA[idx];
+    if (!p) return;
+    currentModalTeacherId = p.id;
+    window.currentModalTeacherId = p.id;
+    document.getElementById('modal-badge').className = `modal-badge tag-cat-${p.cat}`;
+    document.getElementById('modal-badge').textContent = `${p.catLabel} — CUỘC THI "TRI ÂN NGƯỜI TRUYỀN LỬA" 20/11`;
+    
+    document.getElementById('modal-article-title').textContent = `Tác phẩm: "${p.title}"`;
+    const modalTeacherHonorTag = document.getElementById('modal-teacher-honor-tag');
+    if (modalTeacherHonorTag) {
+      modalTeacherHonorTag.textContent = `${getTeacherHonorificEmoji(p.gender)} ${getTeacherHonorific(p.gender)} được tôn vinh`;
+    }
+    document.getElementById('modal-teacher-name').textContent = p.name;
+    document.getElementById('modal-teacher-org').textContent = p.org;
+    const modalAvatarEl = document.getElementById('modal-teacher-avatar');
+    if (modalAvatarEl) {
+      modalAvatarEl.innerHTML = renderTeacherAvatarHtml(p.photo, p.gender, 'modal-teacher-photo');
+    }
+    document.getElementById('modal-author-name').textContent = p.author;
+    document.getElementById('modal-author-role').textContent = p.authorRole;
+    const modalAuthorAvatarEl = document.getElementById('modal-author-avatar');
+    if (modalAuthorAvatarEl) {
+      modalAuthorAvatarEl.innerHTML = renderAuthorAvatarHtml(p.authorPhoto, 'modal-author-photo');
+    }
+
+    // Cập nhật số Tim & Hoa trong modal
+    const modalHeartEl = document.getElementById('modal-heart-count');
+    if (modalHeartEl) modalHeartEl.textContent = getReactionCount(p.id, 'heart');
+    const modalFlowerEl = document.getElementById('modal-flower-count');
+    if (modalFlowerEl) modalFlowerEl.textContent = getReactionCount(p.id, 'flower');
+
+    document.getElementById('modal-quote-text').textContent = `"${p.quote}"`;
+    document.getElementById('modal-article-body').innerHTML = formatStoryBodyHtml(p.full);
+    modalOverlay.classList.add('active');
+  };
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+  }
+
+  btnCloseModal.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  const btnModalFlower = document.getElementById('btn-modal-send-flower');
+  if (btnModalFlower) {
+    btnModalFlower.addEventListener('click', (e) => {
+      if (currentModalTeacherId) {
+        incReaction(currentModalTeacherId, 'flower', e.currentTarget);
+      }
+    });
+  }
+
+  const btnModalHeart = document.getElementById('btn-modal-send-heart');
+  if (btnModalHeart) {
+    btnModalHeart.addEventListener('click', (e) => {
+      if (currentModalTeacherId) {
+        incReaction(currentModalTeacherId, 'heart', e.currentTarget);
+      }
+    });
+  }
+
+  // TƯỜNG HOA TRI ÂN (GUESTBOOK) - NGÂN HÀNG LỜI CHÚC PHONG PHÚ
+  const DEFAULT_WISHES = [
+    {
+      author: 'BS. Lê Minh Quân (Nội trú K46)',
+      recipient: 'GS.TS. Đặng Quốc Bảo',
+      flower: '🌹 Hoa Hồng',
+      message: 'Kính chúc Thầy luôn dồi dào sức khỏe! Lời dặn "khám bệnh nhân trước khi khám hồ sơ" vẫn luôn là kim chỉ nam soi sáng từng ca trực đêm của em.',
+      time: 'Vừa xong'
+    },
+    {
+      author: 'Tập thể Lớp Bác sĩ Đa khoa Y6B',
+      recipient: 'GS.TS. Hoàng Thu Hà',
+      flower: '🪷 Hoa Sen',
+      message: 'Nhân ngày Nhà giáo Việt Nam 20/11, chúng em kính chúc Cô luôn tươi trẻ, tràn đầy nhiệt huyết bên các bệnh nhi và bao thế hệ học trò thân thương!',
+      time: '12 phút trước'
+    },
+    {
+      author: 'BS. Trần Quỳnh Mai',
+      recipient: 'TS.BS Nguyễn Thảo Vy',
+      flower: '🌼 Cúc Họa Mi',
+      message: 'Chúc mừng Cô nhân ngày Nhà giáo Việt Nam 20/11! Cảm ơn Cô vì những đêm trực căng thẳng luôn kiên nhẫn cầm tay chỉ việc, truyền bản lĩnh nghề y cho chúng em.',
+      time: '28 phút trước'
+    },
+    {
+      author: 'Nhóm BSNT Ngoại khoa K45',
+      recipient: 'PGS.TS. Trịnh Văn Long',
+      flower: '🌻 Hướng Dương',
+      message: 'Kính chúc Thầy luôn dồi dào nhiệt huyết! Sự điềm tĩnh và tỉ mỉ của Thầy bên bàn mổ là bài học y đức lớn nhất đời chúng em.',
+      time: '45 phút trước'
+    },
+    {
+      author: 'BS. Phan Thanh Tùng',
+      recipient: 'PGS.TS. Lê Anh Tuấn',
+      flower: '🪷 Hoa Sen',
+      message: 'Kính chúc Thầy bình an! Người thầy đứng sau tấm màn xanh luôn giữ vững nhịp thở và sự an toàn cho từng sinh mệnh con người.',
+      time: '1 giờ trước'
+    },
+    {
+      author: 'SV. Nguyễn Minh Anh (Y5 Đa khoa)',
+      recipient: 'TS.BS Phạm Minh Châu',
+      flower: '🌹 Hoa Hồng',
+      message: 'Nhân ngày Nhà giáo Việt Nam 20/11, kính chúc Cô luôn rạng rỡ! Lời dặn về sự tôn trọng và thấu hiểu nỗi mặc cảm của bệnh nhân da liễu luôn khắc sâu trong tim em.',
+      time: '1 giờ trước'
+    },
+    {
+      author: 'Cựu học viên Ung bướu K39',
+      recipient: 'GS.TS. Vũ Đình Khoa',
+      flower: '🌻 Hướng Dương',
+      message: 'Kính chúc Thầy trường thọ! Bài học về sự hiện diện chân thành bên bệnh nhân giai đoạn cuối đã dạy chúng em cách làm một bác sĩ biết yêu thương.',
+      time: '2 giờ trước'
+    },
+    {
+      author: 'Tập thể BS YHCT Khóa 112',
+      recipient: 'PGS.TS. Đỗ Thị Ngọc',
+      flower: '🌼 Cúc Họa Mi',
+      message: 'Mừng ngày Nhà giáo Việt Nam 20/11 gửi tới Cô kính yêu! Cảm ơn Cô đã truyền cho chúng em tình yêu sâu sắc với từng vị thuốc thảo mộc cổ truyền của dân tộc.',
+      time: '2 giờ trước'
+    },
+    {
+      author: 'BS. Hoàng Văn Đạt',
+      recipient: 'TS.BS Bùi Xuân Hòa',
+      flower: '🪷 Hoa Sen',
+      message: 'Kính chúc Thầy luôn mạnh khỏe! Tinh thần trung thực và trách nhiệm sau từng lát cắt hình ảnh là ngọn đèn dẫn lối cho chúng em.',
+      time: '3 giờ trước'
+    },
+    {
+      author: 'Điều dưỡng viên Khoa Cấp cứu',
+      recipient: 'ThS.BS Ngô Thị Lan',
+      flower: '🌹 Hoa Hồng',
+      message: 'Nhân ngày Nhà giáo Việt Nam 20/11, kính chúc Cô luôn hạnh phúc! Cảm ơn Cô đã dạy chúng em nhớ tên từng người bệnh trước khi nhớ số giường bệnh.',
+      time: '3 giờ trước'
+    },
+    {
+      author: 'Cựu sinh viên Y Hà Nội tại TP.HCM',
+      recipient: 'GS.TTND. Trần Quốc Việt',
+      flower: '🌻 Hướng Dương',
+      message: 'Kính chúc Thầy trường thọ! Phút mặc niệm trước thi hài hiến tặng năm thứ nhất đã khai mở trọn vẹn sự tôn nghiêm của nghề y trong con.',
+      time: '4 giờ trước'
+    },
+    {
+      author: 'Dược sĩ Khóa 58',
+      recipient: 'PGS.TS. Nguyễn Bích Ngọc',
+      flower: '🌹 Hoa Hồng',
+      message: 'Mừng ngày Nhà giáo Việt Nam 20/11 kính tặng Cô! Đơn thuốc biết nghĩ cho túi tiền người nghèo của Cô đã dạy chúng em một bài học vô giá về sự tử tế.',
+      time: '5 giờ trước'
+    },
+    {
+      author: 'BSNT Nội K47',
+      recipient: 'Tất cả các Thầy Cô giáo',
+      flower: '🌹 Hoa Hồng',
+      message: 'Nhân ngày Nhà giáo Việt Nam 20/11, xin gửi ngàn đóa hoa thơm và lòng tri ân sâu sắc nhất tới tất cả các Thầy và Cô trường Đại học Y Hà Nội!',
+      time: '5 giờ trước'
+    },
+    {
+      author: 'Sinh viên Y1 K120',
+      recipient: 'Tất cả các Thầy Cô giáo',
+      flower: '🪷 Hoa Sen',
+      message: 'Chúng em tự hào khi được bước đi dưới mái trường Y Hà Nội và được học tập từ những người thầy, người cô mẫu mực và tận tâm nhất!',
+      time: '6 giờ trước'
+    },
+    {
+      author: 'Bác sĩ Tuyến đầu Tây Bắc',
+      recipient: 'Tất cả các Thầy Cô giáo',
+      flower: '🌻 Hướng Dương',
+      message: 'Dù ở muôn phương, chúng con vẫn luôn hướng về Thầy Cô với lòng biết ơn vô hạn vì nền tảng y đức và tri thức Thầy Cô trao truyền.',
+      time: '7 giờ trước'
+    }
+  ];
+
+  let allWishesPool = [];
+  let displayedWishes = [];
+  let autoWishesInterval = null;
+  let autoWishesRunning = true;
+
+  function loadWishesPool() {
+    const stored = localStorage.getItem('tribute_guestbook_wishes');
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        allWishesPool = Array.isArray(parsed) && parsed.length ? parsed : [...DEFAULT_WISHES];
+      } catch (e) {
+        allWishesPool = [...DEFAULT_WISHES];
+      }
+    } else {
+      allWishesPool = [...DEFAULT_WISHES];
+      localStorage.setItem('tribute_guestbook_wishes', JSON.stringify(DEFAULT_WISHES));
+    }
+    pickInitial10Wishes();
+    render10Wishes();
+  }
+
+  const VALID_CATS = ['nhat', 'nhi', 'ba', 'khuyen-khich', 'dac-biet', 'cong-hien'];
+  const CAT_MAP = {
+    'dac-biet': 'Giải Đặc biệt',
+    'nhat': 'Giải Nhất',
+    'nhi': 'Giải Nhì',
+    'ba': 'Giải Ba',
+    'khuyen-khich': 'Giải Khuyến khích',
+    'cong-hien': 'Giải Cống hiến'
+  };
+
+  function normalizeCategory(val) {
+    if (!val) return '';
+    const s = String(val).trim().toLowerCase();
+    if (CAT_MAP[s]) return s;
+    if (s.includes('khuyen') || s.includes('khuyến')) return 'khuyen-khich';
+    if (s.includes('nhat') || s.includes('nhất')) return 'nhat';
+    if (s.includes('nhi') || s.includes('nhì')) return 'nhi';
+    if (s.includes('ba')) return 'ba';
+    if (s.includes('dac-biet') || s.includes('đặc biệt')) return 'dac-biet';
+    if (s.includes('cong-hien') || s.includes('cống hiến')) return 'cong-hien';
+    return '';
+  }
+
+  // Cập nhật số lượng trên các tab lọc và thanh thống kê
+  function updateFilterCounts() {
+    if (!DATA.length) return;
+    const counts = { all: DATA.length };
+    DATA.forEach(item => {
+      const cat = item.cat || 'khac';
+      counts[cat] = (counts[cat] || 0) + 1;
+    });
+
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      const filter = tab.dataset.filter;
+      if (filter === 'all') {
+        tab.textContent = `Tất Cả (${counts.all || 0})`;
+      } else if (filter === 'nhat') {
+        tab.textContent = `Giải Nhất (${counts.nhat || 0})`;
+      } else if (filter === 'nhi') {
+        tab.textContent = `Giải Nhì (${counts.nhi || 0})`;
+      } else if (filter === 'ba') {
+        tab.textContent = `Giải Ba (${counts.ba || 0})`;
+      } else if (filter === 'khuyen-khich') {
+        tab.textContent = `Giải Khuyến khích (${counts['khuyen-khich'] || 0})`;
+      }
+    });
+
+    const teacherStat = document.getElementById('stat-teachers-count');
+    if (teacherStat) teacherStat.textContent = DATA.length < 10 ? '0' + DATA.length : String(DATA.length);
+
+    const authorStat = document.getElementById('stat-authors-count');
+    if (authorStat) {
+      const uniqueAuthors = new Set(DATA.map(d => d.author).filter(Boolean)).size;
+      authorStat.textContent = uniqueAuthors < 10 ? '0' + uniqueAuthors : String(uniqueAuthors);
+    }
+
+    const catStat = document.getElementById('stat-categories-count');
+    if (catStat) {
+      const uniqueCats = new Set(DATA.map(d => d.cat).filter(Boolean)).size;
+      catStat.textContent = uniqueCats < 10 ? '0' + uniqueCats : String(uniqueCats);
+    }
+  }
+
+  function setSheetSyncStatus(message, isError = false, isLoading = false) {
+    sheetSyncMessage = message;
+    const status = document.getElementById('sheet-sync-status');
+    const dot = document.getElementById('sheet-sync-dot');
+    const container = document.getElementById('sheet-sync-container');
+    if (status) {
+      status.textContent = message;
+      status.style.color = isError ? 'var(--ruby)' : 'var(--ink)';
+    }
+    if (dot) {
+      dot.style.background = isError ? '#ef4444' : (isLoading ? '#eab308' : '#22c55e');
+    }
+    const retryButton = document.getElementById('btn-retry-sheet-data');
+    if (retryButton) retryButton.style.display = isError ? 'inline-flex' : 'none';
+    if (container) {
+      container.style.display = isError ? 'flex' : 'none';
+    }
+  }
+
+  function loadPublicBootstrap(apiUrl) {
+    if (window.fetch) {
+      const fetchEndpoint = apiUrl + (apiUrl.includes('?') ? '&' : '?') + 'action=bootstrap&t=' + Date.now();
+      const doFetch = () => window.fetch(fetchEndpoint, {
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store'
+      }).then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      });
+
+      return doFetch()
+        .catch(() => new Promise(r => setTimeout(r, 1000)).then(doFetch))
+        .catch(() => loadPublicBootstrapJsonp(apiUrl));
+    }
+    return loadPublicBootstrapJsonp(apiUrl);
+  }
+
+  function loadPublicBootstrapJsonp(apiUrl) {
+    return new Promise((resolve, reject) => {
+      const callbackName = '__tributeCallback_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+      const script = document.createElement('script');
+      let settled = false;
+      const finish = (callback, value) => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeoutId);
+        delete window[callbackName];
+        script.remove();
+        callback(value);
+      };
+      const timeoutId = window.setTimeout(() => finish(reject, new Error('BOOTSTRAP_TIMEOUT')), 10000);
+
+      window[callbackName] = payload => finish(resolve, payload);
+      script.onerror = () => finish(reject, new Error('BOOTSTRAP_LOAD_FAILED'));
+      script.src = apiUrl + '?action=bootstrap&callback=' + encodeURIComponent(callbackName) + '&t=' + Date.now();
+      document.head.appendChild(script);
+    });
+  }
+
+  async function syncTeachersFromGoogleSheet() {
+    if (teacherSyncInFlight) return;
+    teacherSyncInFlight = true;
+    lastTeacherSyncAttemptAt = Date.now();
+    const apiUrl = getConfiguredAppsScriptUrl();
+    if (!apiUrl) {
+      setSheetSyncStatus('Chưa cấu hình URL Apps Script Web App.', true);
+      renderAwardsGrid();
+      teacherSyncInFlight = false;
+      return;
+    }
+
+    setSheetSyncStatus('Đang tải dữ liệu từ Google Sheet...', false, true);
+    try {
+      const result = await loadPublicBootstrap(apiUrl);
+      if (!result || !result.ok || !result.data) {
+        throw new Error((result && result.code) || 'BOOTSTRAP_FAILED');
+      }
+
+      const source = Array.isArray(result.data.teachers) ? result.data.teachers : [];
+      const uniqueTeachers = window.TributeCore ? window.TributeCore.normalizeTeachers(source) : source;
+      if (!uniqueTeachers.length) throw new Error('TEACHER_DATA_MISSING');
+
+      const teachers = uniqueTeachers.map((teacher, index) => {
+        const category = VALID_CATS.includes(teacher.cat)
+          ? teacher.cat
+          : normalizeCategory(teacher.cat) || normalizeCategory(teacher.catLabel) || 'khuyen-khich';
+        return {
+          ...teacher,
+          id: parseInt(teacher.id, 10) || index + 1,
+          cat: category,
+          catLabel: CAT_MAP[category] || teacher.catLabel || 'Giải Khuyến khích',
+          full: typeof teacher.full === 'string' ? teacher.full : '',
+          photo: typeof teacher.photo === 'string' ? teacher.photo : '',
+          authorPhoto: typeof teacher.authorPhoto === 'string' ? teacher.authorPhoto : '',
+          hearts: Number.isFinite(Number(teacher.hearts)) ? Number(teacher.hearts) : 100,
+          flowers: Number.isFinite(Number(teacher.flowers)) ? Number(teacher.flowers) : 120
+        };
+      }).filter(teacher => teacher.name && teacher.title);
+      if (!teachers.length) throw new Error('TEACHER_DATA_INVALID');
+
+      applyUpdatedTeachersData(teachers);
+      if (Array.isArray(result.data.wishes)) {
+        const approved = window.TributeCore
+          ? window.TributeCore.publicWishes(result.data.wishes)
+          : result.data.wishes;
+        if (approved.length) {
+          allWishesPool = approved.map(wish => ({
+            time: wish.time || 'Hôm nay',
+            author: wish.author,
+            recipient: wish.recipient || 'Thầy Cô',
+            flower: wish.flower || '🌹 Hoa Hồng',
+            message: wish.message
+          }));
+          localStorage.setItem('tribute_guestbook_wishes', JSON.stringify(allWishesPool));
+          pickInitial10Wishes();
+          render10Wishes();
+        }
+      }
+      if (result.data.config && result.data.config.LOGO_URL) applySiteLogo(result.data.config.LOGO_URL);
+      setSheetSyncStatus('Đã đồng bộ dữ liệu trực tiếp từ Google Sheet lúc ' + new Date().toLocaleTimeString('vi-VN') + ' (' + teachers.length + ' bài thi)');
+    } catch (error) {
+      console.warn('Google Sheet sync failed:', error);
+      const message = DATA.length
+        ? 'Không tải được bản cập nhật mới; đang giữ dữ liệu đã tải trước đó.'
+        : 'Không tải được dữ liệu Google Sheet. Kiểm tra URL deployment và quyền truy cập.';
+      setSheetSyncStatus(message, true);
+      renderAwardsGrid();
+      updateFilterCounts();
+    } finally {
+      teacherSyncInFlight = false;
+    }
+  }
+
+  const retrySheetDataButton = document.getElementById('btn-retry-sheet-data');
+  if (retrySheetDataButton) {
+    retrySheetDataButton.addEventListener('click', () => {
+      teacherSyncInFlight = false;
+      syncTeachersFromGoogleSheet();
+    });
+  }
+
+  function applyUpdatedTeachersData(newTeachers) {
+    if (!Array.isArray(newTeachers) || newTeachers.length === 0) return;
+    DATA.length = 0;
+    newTeachers.forEach(t => DATA.push(t));
+    updateFilterCounts();
+    renderAwardsGrid();
+    spotIndex = spotIndex % DATA.length;
+    renderSpotlightItem(spotIndex);
+    if (!spotInterval) startSpotlight();
+    const select = document.getElementById('recipient-teacher');
+    if (select) {
+      select.innerHTML = '<option value="Tất cả các Thầy Cô giáo" data-id="all">Kính gửi Tất cả các Thầy Cô giáo</option>';
+      DATA.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.name;
+        opt.dataset.id = String(p.id);
+        opt.textContent = `${p.name} (${p.org})`;
+        select.appendChild(opt);
+      });
+    }
+  }
+
+  function pickInitial10Wishes() {
+    const shuffled = [...allWishesPool].sort(() => 0.5 - Math.random());
+    displayedWishes = shuffled.slice(0, Math.min(10, shuffled.length));
+  }
+
+  function render10Wishes(highlightIndex = -1) {
+    const container = document.getElementById('wishes-list');
+    if (!container) return;
+
+    container.innerHTML = displayedWishes.map((w, i) => {
+      const isHighlighted = i === highlightIndex ? 'highlight-swap' : '';
+      const safeAuthor = escapeHtml(w.author);
+      const safeRecipient = escapeHtml(w.recipient);
+      const safeFlower = escapeHtml(w.flower);
+      const safeMsg = escapeHtml(w.message);
+      const safeTime = escapeHtml(w.time);
+      return `
+        <div class="wish-card ${isHighlighted}" data-index="${i}" title="${safeAuthor}: ${safeMsg}">
+          <div class="wish-card-head">
+            <span class="wish-author" title="${safeAuthor}">${safeAuthor}</span>
+            <span class="wish-recipient">${safeFlower} • ${safeRecipient}</span>
+          </div>
+          <p class="wish-text">${safeMsg}</p>
+          <div class="wish-time">${safeTime}</div>
+        </div>
+      `;
+    }).join('');
+
+    const statEl = document.getElementById('total-wishes-stat');
+    if (statEl) {
+      statEl.textContent = (2024 + allWishesPool.length) + '+';
+    }
+  }
+
+  // Tự động hoán đổi ngẫu nhiên 1 lời chúc mỗi 4.5 giây
+  function swapOneRandomWish() {
+    if (!autoWishesRunning || displayedWishes.length === 0) return;
+
+    // Tìm các lời chúc trong kho chưa xuất hiện trong 10 thẻ đang hiển thị
+    const available = allWishesPool.filter(w =>
+      !displayedWishes.some(dw => dw.author === w.author && dw.message === w.message)
+    );
+
+    if (available.length === 0) {
+      pickInitial10Wishes();
+      render10Wishes(0);
+      return;
+    }
+
+    const randomNewWish = available[Math.floor(Math.random() * available.length)];
+    const targetIdx = Math.floor(Math.random() * displayedWishes.length);
+
+    displayedWishes[targetIdx] = randomNewWish;
+    render10Wishes(targetIdx);
+  }
+
+  function startAutoWishesCycle() {
+    if (autoWishesInterval) clearInterval(autoWishesInterval);
+    autoWishesRunning = true;
+    autoWishesInterval = setInterval(swapOneRandomWish, 4500);
+    const btn = document.getElementById('btn-toggle-auto-wishes');
+    if (btn) btn.textContent = '⏸ Tự Động';
+  }
+
+  function stopAutoWishesCycle() {
+    autoWishesRunning = false;
+    clearInterval(autoWishesInterval);
+    const btn = document.getElementById('btn-toggle-auto-wishes');
+    if (btn) btn.textContent = '▶ Tiếp Tục';
+  }
+
+  // Nút xáo trộn thủ công
+  const btnShuffle = document.getElementById('btn-shuffle-wishes');
+  if (btnShuffle) {
+    btnShuffle.addEventListener('click', () => {
+      pickInitial10Wishes();
+      render10Wishes(0);
+    });
+  }
+
+  // Nút tạm dừng / tiếp tục tự động đổi
+  const btnToggleAutoWishes = document.getElementById('btn-toggle-auto-wishes');
+  if (btnToggleAutoWishes) {
+    btnToggleAutoWishes.addEventListener('click', () => {
+      if (autoWishesRunning) stopAutoWishesCycle();
+      else startAutoWishesCycle();
+    });
+  }
+
+  // Populate Select Teacher in Form
+  const selectTeacher = document.getElementById('recipient-teacher');
+  DATA.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.name;
+    opt.textContent = `${p.name} (${p.org})`;
+    selectTeacher.appendChild(opt);
+  });
+
+  // Flower choice buttons
+  let selectedFlower = '🌹 Hoa Hồng';
+  const flowerOptions = document.querySelectorAll('.flower-option');
+  flowerOptions.forEach(opt => {
+    opt.addEventListener('click', () => {
+      flowerOptions.forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      selectedFlower = opt.dataset.flower;
+    });
+  });
+
+  // Submit wish: Bảo vệ honeypot, chống flood, chống injection và gửi an toàn tới Apps Script Web App
+  document.getElementById('wish-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // 1. Kiểm tra honeypot chống bot
+    const trap = document.getElementById('form-website-trap');
+    if (trap && trap.value) {
+      console.warn('Bot detected via honeypot.');
+      return;
+    }
+
+    // 2. Chống gửi quá nhanh (cooldown 4 giây)
+    const lastSubmit = parseInt(localStorage.getItem('tribute_last_submit_ts') || '0', 10);
+    const now = Date.now();
+    if (now - lastSubmit < 4000) {
+      alert('Bạn vui lòng đợi vài giây trước khi gửi tiếp đóa hoa tiếp theo nhé!');
+      return;
+    }
+
+    const author = document.getElementById('author-name').value.trim();
+    const selectElem = document.getElementById('recipient-teacher');
+    const selectedOpt = selectElem ? selectElem.options[selectElem.selectedIndex] : null;
+    const recipient = selectElem ? selectElem.value : 'Tất cả các Thầy Cô giáo';
+    const recipientId = (selectedOpt && selectedOpt.dataset && selectedOpt.dataset.id) ? selectedOpt.dataset.id : 'all';
+    const message = document.getElementById('wish-message').value.trim();
+
+    if (!author || !message) return;
+    const apiUrl = getConfiguredAppsScriptUrl();
+    if (!apiUrl) {
+      alert('Hệ thống chưa cấu hình URL Apps Script. Vui lòng thử lại sau.');
+      return;
+    }
+    localStorage.setItem('tribute_last_submit_ts', now);
+
+    const safeAuthor = sanitizeFormula(author);
+    const safeMsg = sanitizeFormula(message);
+
+    const FLOWER_CODE_MAP = {
+      '🌹 Hoa Hồng': 'rose',
+      '🌻 Hướng Dương': 'sunflower',
+      '🪷 Hoa Sen': 'lotus',
+      '🌼 Cúc Họa Mi': 'daisy'
+    };
+    const flowerCode = FLOWER_CODE_MAP[selectedFlower] || 'rose';
+
+    let installationId = localStorage.getItem('tribute_installation_id');
+    if (!installationId || !/^[A-Za-z0-9_-]{12,80}$/.test(installationId)) {
+      installationId = 'inst_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem('tribute_installation_id', installationId);
+    }
+    const requestId = 'req_' + Date.now() + '_' + Math.random().toString(36).slice(2, 14);
+
+    const newWish = {
+      author: safeAuthor,
+      recipient: recipient,
+      flower: selectedFlower,
+      message: safeMsg,
+      time: 'Vừa xong'
+    };
+
+    // Đưa ngay vào kho và hiển thị lập tức trong phiên người dùng
+    allWishesPool.unshift(newWish);
+    localStorage.setItem('tribute_guestbook_wishes', JSON.stringify(allWishesPool));
+
+    displayedWishes.unshift(newWish);
+    if (displayedWishes.length > 10) displayedWishes.pop();
+    render10Wishes(0);
+
+    // Gửi tới Apps Script Web App để lưu vào Sheet LoiChuc an toàn
+    if (apiUrl) {
+      const wishPayload = {
+        action: 'submit_wish',
+        author: safeAuthor,
+        recipientId: recipientId,
+        recipient: recipient,
+        flower: flowerCode,
+        message: safeMsg,
+        installationId: installationId,
+        requestId: requestId,
+        website: ''
+      };
+
+      const bodyContent = window.TributeCore && window.TributeCore.toAsciiJson
+        ? window.TributeCore.toAsciiJson(wishPayload)
+        : JSON.stringify(wishPayload);
+
+      fetch(apiUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: bodyContent
+      }).catch(err => console.log('Apps Script submit note:', err));
+    }
+
+    // Reset Form
+    document.getElementById('author-name').value = '';
+    document.getElementById('wish-message').value = '';
+
+    alert('💐 Cảm ơn bạn! Đóa hoa và lời chúc tri ân của bạn đã được tặng trang trọng trên Tường hoa.');
+  });
+
+  // CANVAS CÁNH HOA RƠI (FALLING PETALS)
+  const canvas = document.getElementById('petal-canvas');
+  const ctx = canvas.getContext('2d');
+  let petals = [];
+  let petalsRunning = true;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  class Petal {
+    constructor() {
+      this.reset(true);
+    }
+    reset(initial = false) {
+      this.x = Math.random() * canvas.width;
+      this.y = initial ? Math.random() * canvas.height : -20;
+      this.size = Math.random() * 8 + 6;
+      this.speedY = Math.random() * 1.2 + 0.8;
+      this.speedX = (Math.random() - 0.5) * 0.8;
+      this.angle = Math.random() * Math.PI * 2;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.03;
+      this.opacity = Math.random() * 0.45 + 0.35;
+      this.color = Math.random() > 0.3 ? 'rgba(255, 154, 162,' : 'rgba(247, 215, 148,';
+    }
+    update() {
+      this.y += this.speedY;
+      this.x += Math.sin(this.angle) * 0.6 + this.speedX;
+      this.angle += this.rotationSpeed;
+      if (this.y > canvas.height + 20) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.angle);
+      ctx.fillStyle = this.color + this.opacity + ')';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < 35; i++) {
+    petals.push(new Petal());
+  }
+
+  let petalFrameId = null;
+  function animatePetals() {
+    if (!petalsRunning) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    petals.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    petalFrameId = requestAnimationFrame(animatePetals);
+  }
+
+  // Tiết kiệm 100% tài nguyên CPU / Pin khi người dùng chuyển sang tab khác
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (petalFrameId) {
+        cancelAnimationFrame(petalFrameId);
+        petalFrameId = null;
+      }
+    } else {
+      if (petalsRunning && !petalFrameId) {
+        animatePetals();
+      }
+    }
+  });
+
+  const btnTogglePetals = document.getElementById('btn-toggle-petals');
+  btnTogglePetals.addEventListener('click', () => {
+    petalsRunning = !petalsRunning;
+    btnTogglePetals.classList.toggle('active', petalsRunning);
+    if (petalsRunning) {
+      animatePetals();
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  });
+
+  // NHẠC NỀN DU DƯƠNG (WEB AUDIO API SYNTHESIZER)
+  let audioCtx = null;
+  let musicPlaying = false;
+  let musicTimer = null;
+  const btnToggleMusic = document.getElementById('btn-toggle-music');
+  const musicIcon = document.getElementById('music-icon');
+
+  const MELODY_NOTES = [
+    261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25
+  ];
+
+  function playNote(freq, time, duration = 1.2) {
+    if (!audioCtx) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, time);
+
+      gain.gain.setValueAtTime(0, time);
+      gain.gain.linearRampToValueAtTime(0.04, time + 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(time);
+      osc.stop(time + duration);
+    } catch(e) {}
+  }
+
+  function startChimes() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    musicPlaying = true;
+    musicIcon.textContent = '🔊';
+    btnToggleMusic.classList.add('active');
+
+    let step = 0;
+    const pattern = [0, 2, 4, 3, 5, 4, 2, 1, 0, 4, 3, 2];
+    
+    function loopMelody() {
+      if (!musicPlaying) return;
+      const now = audioCtx.currentTime;
+      const noteIdx = pattern[step % pattern.length];
+      playNote(MELODY_NOTES[noteIdx], now, 1.8);
+      
+      if (step % 2 === 0) {
+        playNote(MELODY_NOTES[noteIdx % 3] / 2, now, 2.4);
+      }
+
+      step++;
+      musicTimer = setTimeout(loopMelody, 800);
+    }
+    loopMelody();
+  }
+
+  function stopChimes() {
+    musicPlaying = false;
+    musicIcon.textContent = '🎵';
+    btnToggleMusic.classList.remove('active');
+    if (musicTimer) clearTimeout(musicTimer);
+  }
+
+  btnToggleMusic.addEventListener('click', () => {
+    if (musicPlaying) stopChimes();
+    else startChimes();
+  });
+
+  // KHỞI ĐỘNG CÁC THÀNH PHẦN BAN ĐẦU
+  updateFilterCounts();
+  renderAwardsGrid();
+  renderSpotlightItem(0);
+  startSpotlight();
+  loadWishesPool();
+  startAutoWishesCycle();
+  animatePetals();
+  syncTeachersFromGoogleSheet();
+  window.setInterval(syncTeachersFromGoogleSheet, 65000);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && Date.now() - lastTeacherSyncAttemptAt >= 60000) syncTeachersFromGoogleSheet();
+  });
+
+})();
+</script>
+</body>
+</html>
