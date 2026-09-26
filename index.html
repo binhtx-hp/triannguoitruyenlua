@@ -824,8 +824,8 @@
 
   .award-ribbon {
     position: absolute;
-    top: 14px;
-    right: 16px;
+    top: 5px;
+    right: 26px;
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
@@ -1843,7 +1843,7 @@
         <div class="stat-label">Tác Giả Xuất Sắc Đoạt Giải</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" id="stat-categories-count">05</div>
+        <div class="stat-num" id="stat-categories-count">04</div>
         <div class="stat-label">Hạng Mục Trao Giải</div>
       </div>
       <div class="stat-item">
@@ -2180,7 +2180,7 @@
   // CẤU HÌNH DATABASE GOOGLE SHEETS
   const GOOGLE_SHEET_CONFIG = {
     // Thay bằng URL /exec của Web App đang hoạt động sau khi deploy.
-    webAppUrl: 'https://script.google.com/macros/s/AKfycbxRmZP_yCLe93q3sLDYnpumMTC0Lc1q7DX8sftL9kePjuzv-7C-9yZS1YCuhb0YU9b2/exec'
+    webAppUrl: 'https://script.google.com/macros/s/AKfycbwve3qaO8DrxAnKj0011VrMAPNkHbJdKUm0sp1W4O-x2HH-uLV2UMviR-nuYJ9qsCqA/exec'
   };
 
   function getConfiguredAppsScriptUrl() {
@@ -2314,33 +2314,171 @@
     } catch(e) {}
   }
 
+  const pendingReactionCounts = new Map();
+  const REACTION_FLUSH_DELAY_MS = 800;
+  const REACTION_RETRY_DELAY_MS = 5000;
+  let reactionFlushTimer = null;
+  let reactionRequestInFlight = false;
+  let reactionBatchInFlight = null;
+
+  function getOrCreateInstallationId() {
+    let installationId = localStorage.getItem('tribute_installation_id');
+    if (!installationId || !/^[A-Za-z0-9_-]{12,80}$/.test(installationId)) {
+      installationId = 'inst_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem('tribute_installation_id', installationId);
+    }
+    return installationId;
+  }
+
+  function reactionKey(id, type) {
+    return String(id) + '|' + type;
+  }
+
   function getReactionCount(id, type) {
     id = parseInt(id, 10);
+    if (!id || (type !== 'heart' && type !== 'flower')) return 0;
     const item = DATA.find(x => parseInt(x.id, 10) === id);
     const keyProp = type === 'heart' ? 'hearts' : 'flowers';
-    const baseCount = (item && typeof item[keyProp] === 'number') ? item[keyProp] : 100;
-    const userAdded = parseInt(localStorage.getItem(`tribute_user_added_${id}_${type}`) || '0', 10);
-    return baseCount + userAdded;
+    const baseCount = (item && Number.isFinite(Number(item[keyProp]))) ? Number(item[keyProp]) : 100;
+    return baseCount + (pendingReactionCounts.get(reactionKey(id, type)) || 0);
   }
   window.getReactionCount = getReactionCount;
 
-  function incReaction(id, type, btnEl) {
-    id = parseInt(id, 10);
-    if (!id || isNaN(id)) {
-      if (typeof currentModalTeacherId !== 'undefined' && currentModalTeacherId) {
-        id = parseInt(currentModalTeacherId, 10);
-      } else {
-        id = 1;
+  function makeReactionBatch() {
+    const reactions = [];
+    let remaining = 500;
+    for (const [key, pending] of pendingReactionCounts) {
+      if (remaining <= 0 || reactions.length >= 40) break;
+      const separator = key.lastIndexOf('|');
+      const teacherId = key.slice(0, separator);
+      const type = key.slice(separator + 1);
+      const delta = Math.min(pending, 100, remaining);
+      if (delta > 0) {
+        reactions.push({teacherId, type, delta});
+        remaining -= delta;
       }
     }
+    if (!reactions.length) return null;
+    return {
+      action: 'reaction',
+      installationId: getOrCreateInstallationId(),
+      requestId: 'react_' + Date.now() + '_' + Math.random().toString(36).slice(2, 14),
+      reactions
+    };
+  }
 
-    const userKey = `tribute_user_added_${id}_${type}`;
-    const userAdded = parseInt(localStorage.getItem(userKey) || '0', 10) + 1;
-    localStorage.setItem(userKey, userAdded);
-    
+  function scheduleReactionFlush(delay = REACTION_FLUSH_DELAY_MS) {
+    if (reactionFlushTimer || reactionRequestInFlight || !pendingReactionCounts.size) return;
+    reactionFlushTimer = window.setTimeout(() => {
+      reactionFlushTimer = null;
+      flushReactionQueue();
+    }, delay);
+  }
+
+  function applyReactionReceipt(batch, receipt) {
+    (Array.isArray(receipt.counts) ? receipt.counts : []).forEach(result => {
+      const item = DATA.find(row => String(row.id) === String(result.teacherId));
+      if (!item || !Number.isSafeInteger(Number(result.count))) return;
+      if (result.type === 'heart') item.hearts = Number(result.count);
+      if (result.type === 'flower') item.flowers = Number(result.count);
+    });
+
+    batch.reactions.forEach(reaction => {
+      const key = reactionKey(reaction.teacherId, reaction.type);
+      const left = Math.max(0, (pendingReactionCounts.get(key) || 0) - reaction.delta);
+      if (left) pendingReactionCounts.set(key, left);
+      else pendingReactionCounts.delete(key);
+      updateReactionDisplays(reaction.teacherId, reaction.type, getReactionCount(reaction.teacherId, reaction.type));
+    });
+  }
+
+  async function waitForReactionReceipt(apiUrl, requestId) {
+    for (let attempt = 0; attempt < 8; attempt++) {
+      const result = await loadAppsScriptJsonp(apiUrl, { action: 'reaction_status', requestId });
+      if (!result || !result.ok || !result.data) throw new Error('REACTION_STATUS_FAILED');
+      const status = String(result.data.status || 'NOT_FOUND');
+      if (status === 'APPLIED' || status === 'RATE_LIMITED') return result.data;
+      if (status !== 'NOT_FOUND') throw new Error('REACTION_STATUS_' + status);
+      await new Promise(resolve => window.setTimeout(resolve, 500));
+    }
+    throw new Error('REACTION_NOT_CONFIRMED');
+  }
+
+  async function flushReactionQueue() {
+    if (reactionRequestInFlight || !pendingReactionCounts.size) return;
+    if (!reactionBatchInFlight) reactionBatchInFlight = makeReactionBatch();
+    if (!reactionBatchInFlight) return;
+
+    const apiUrl = getConfiguredAppsScriptUrl();
+    if (!apiUrl) {
+      scheduleReactionFlush(REACTION_RETRY_DELAY_MS);
+      return;
+    }
+
+    const batch = reactionBatchInFlight;
+    const bodyContent = window.TributeCore && window.TributeCore.toAsciiJson
+      ? window.TributeCore.toAsciiJson(batch)
+      : JSON.stringify(batch);
+    let nextFlushDelay = REACTION_RETRY_DELAY_MS;
+    reactionRequestInFlight = true;
+    try {
+      await fetch(apiUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: bodyContent
+      });
+
+      const receipt = await waitForReactionReceipt(apiUrl, batch.requestId);
+      if (receipt.status === 'RATE_LIMITED') {
+        nextFlushDelay = (Number(receipt.retryAfterSeconds) || 60) * 1000 + 1000;
+        return;
+      }
+
+      applyReactionReceipt(batch, receipt);
+      reactionBatchInFlight = null;
+      setSheetSyncStatus('Đã lưu lượt tim/hoa vào Google Sheet.');
+      nextFlushDelay = 0;
+    } catch (error) {
+      console.warn('Google Sheet reaction sync failed:', error);
+      setSheetSyncStatus('Lượt tim/hoa đang chờ kết nối để đồng bộ.', true);
+    } finally {
+      reactionRequestInFlight = false;
+      if (pendingReactionCounts.size) scheduleReactionFlush(nextFlushDelay);
+    }
+  }
+
+  function sendReactionBatchOnPageExit() {
+    if (reactionRequestInFlight && reactionBatchInFlight) {
+      const apiUrl = getConfiguredAppsScriptUrl();
+      if (apiUrl) {
+        const body = window.TributeCore && window.TributeCore.toAsciiJson
+          ? window.TributeCore.toAsciiJson(reactionBatchInFlight)
+          : JSON.stringify(reactionBatchInFlight);
+        fetch(apiUrl, {method:'POST', mode:'no-cors', keepalive:true,
+          headers:{'Content-Type':'text/plain;charset=utf-8'}, body}).catch(() => {});
+      }
+      return;
+    }
+    if (!pendingReactionCounts.size) return;
+    if (!reactionBatchInFlight) reactionBatchInFlight = makeReactionBatch();
+    const apiUrl = getConfiguredAppsScriptUrl();
+    if (!apiUrl || !reactionBatchInFlight) return;
+    const body = window.TributeCore && window.TributeCore.toAsciiJson
+      ? window.TributeCore.toAsciiJson(reactionBatchInFlight)
+      : JSON.stringify(reactionBatchInFlight);
+    fetch(apiUrl, {method:'POST', mode:'no-cors', keepalive:true,
+      headers:{'Content-Type':'text/plain;charset=utf-8'}, body}).catch(() => {});
+  }
+
+  function incReaction(id, type, btnEl) {
+    id = parseInt(id, 10);
+    if (!id || (type !== 'heart' && type !== 'flower') || !DATA.some(item => parseInt(item.id, 10) === id)) return;
+
+    const key = reactionKey(id, type);
+    pendingReactionCounts.set(key, (pendingReactionCounts.get(key) || 0) + 1);
     const newCount = getReactionCount(id, type);
 
-    // Cập nhật ngay trên nút được bấm
     if (btnEl) {
       const cnt = btnEl.querySelector('.count');
       if (cnt) {
@@ -2349,12 +2487,9 @@
         setTimeout(() => cnt.classList.remove('pop-number'), 400);
       }
     }
-
-    // Cập nhật số trên tất cả các vị trí hiển thị (Bảng vàng, Spotlight, Modal)
     updateReactionDisplays(id, type, newCount);
-
-    // Kích hoạt hiệu ứng bùng nổ hoa / tim rực rỡ
     triggerReactionBurst(btnEl, type);
+    scheduleReactionFlush();
   }
   window.incReaction = incReaction;
 
@@ -2928,134 +3063,14 @@
     });
   }
 
-  // TƯỜNG HOA TRI ÂN (GUESTBOOK) - NGÂN HÀNG LỜI CHÚC PHONG PHÚ
-  const DEFAULT_WISHES = [
-    {
-      author: 'BS. Lê Minh Quân (Nội trú K46)',
-      recipient: 'GS.TS. Đặng Quốc Bảo',
-      flower: '🌹 Hoa Hồng',
-      message: 'Kính chúc Thầy luôn dồi dào sức khỏe! Lời dặn "khám bệnh nhân trước khi khám hồ sơ" vẫn luôn là kim chỉ nam soi sáng từng ca trực đêm của em.',
-      time: 'Vừa xong'
-    },
-    {
-      author: 'Tập thể Lớp Bác sĩ Đa khoa Y6B',
-      recipient: 'GS.TS. Hoàng Thu Hà',
-      flower: '🪷 Hoa Sen',
-      message: 'Nhân ngày Nhà giáo Việt Nam 20/11, chúng em kính chúc Cô luôn tươi trẻ, tràn đầy nhiệt huyết bên các bệnh nhi và bao thế hệ học trò thân thương!',
-      time: '12 phút trước'
-    },
-    {
-      author: 'BS. Trần Quỳnh Mai',
-      recipient: 'TS.BS Nguyễn Thảo Vy',
-      flower: '🌼 Cúc Họa Mi',
-      message: 'Chúc mừng Cô nhân ngày Nhà giáo Việt Nam 20/11! Cảm ơn Cô vì những đêm trực căng thẳng luôn kiên nhẫn cầm tay chỉ việc, truyền bản lĩnh nghề y cho chúng em.',
-      time: '28 phút trước'
-    },
-    {
-      author: 'Nhóm BSNT Ngoại khoa K45',
-      recipient: 'PGS.TS. Trịnh Văn Long',
-      flower: '🌻 Hướng Dương',
-      message: 'Kính chúc Thầy luôn dồi dào nhiệt huyết! Sự điềm tĩnh và tỉ mỉ của Thầy bên bàn mổ là bài học y đức lớn nhất đời chúng em.',
-      time: '45 phút trước'
-    },
-    {
-      author: 'BS. Phan Thanh Tùng',
-      recipient: 'PGS.TS. Lê Anh Tuấn',
-      flower: '🪷 Hoa Sen',
-      message: 'Kính chúc Thầy bình an! Người thầy đứng sau tấm màn xanh luôn giữ vững nhịp thở và sự an toàn cho từng sinh mệnh con người.',
-      time: '1 giờ trước'
-    },
-    {
-      author: 'SV. Nguyễn Minh Anh (Y5 Đa khoa)',
-      recipient: 'TS.BS Phạm Minh Châu',
-      flower: '🌹 Hoa Hồng',
-      message: 'Nhân ngày Nhà giáo Việt Nam 20/11, kính chúc Cô luôn rạng rỡ! Lời dặn về sự tôn trọng và thấu hiểu nỗi mặc cảm của bệnh nhân da liễu luôn khắc sâu trong tim em.',
-      time: '1 giờ trước'
-    },
-    {
-      author: 'Cựu học viên Ung bướu K39',
-      recipient: 'GS.TS. Vũ Đình Khoa',
-      flower: '🌻 Hướng Dương',
-      message: 'Kính chúc Thầy trường thọ! Bài học về sự hiện diện chân thành bên bệnh nhân giai đoạn cuối đã dạy chúng em cách làm một bác sĩ biết yêu thương.',
-      time: '2 giờ trước'
-    },
-    {
-      author: 'Tập thể BS YHCT Khóa 112',
-      recipient: 'PGS.TS. Đỗ Thị Ngọc',
-      flower: '🌼 Cúc Họa Mi',
-      message: 'Mừng ngày Nhà giáo Việt Nam 20/11 gửi tới Cô kính yêu! Cảm ơn Cô đã truyền cho chúng em tình yêu sâu sắc với từng vị thuốc thảo mộc cổ truyền của dân tộc.',
-      time: '2 giờ trước'
-    },
-    {
-      author: 'BS. Hoàng Văn Đạt',
-      recipient: 'TS.BS Bùi Xuân Hòa',
-      flower: '🪷 Hoa Sen',
-      message: 'Kính chúc Thầy luôn mạnh khỏe! Tinh thần trung thực và trách nhiệm sau từng lát cắt hình ảnh là ngọn đèn dẫn lối cho chúng em.',
-      time: '3 giờ trước'
-    },
-    {
-      author: 'Điều dưỡng viên Khoa Cấp cứu',
-      recipient: 'ThS.BS Ngô Thị Lan',
-      flower: '🌹 Hoa Hồng',
-      message: 'Nhân ngày Nhà giáo Việt Nam 20/11, kính chúc Cô luôn hạnh phúc! Cảm ơn Cô đã dạy chúng em nhớ tên từng người bệnh trước khi nhớ số giường bệnh.',
-      time: '3 giờ trước'
-    },
-    {
-      author: 'Cựu sinh viên Y Hà Nội tại TP.HCM',
-      recipient: 'GS.TTND. Trần Quốc Việt',
-      flower: '🌻 Hướng Dương',
-      message: 'Kính chúc Thầy trường thọ! Phút mặc niệm trước thi hài hiến tặng năm thứ nhất đã khai mở trọn vẹn sự tôn nghiêm của nghề y trong con.',
-      time: '4 giờ trước'
-    },
-    {
-      author: 'Dược sĩ Khóa 58',
-      recipient: 'PGS.TS. Nguyễn Bích Ngọc',
-      flower: '🌹 Hoa Hồng',
-      message: 'Mừng ngày Nhà giáo Việt Nam 20/11 kính tặng Cô! Đơn thuốc biết nghĩ cho túi tiền người nghèo của Cô đã dạy chúng em một bài học vô giá về sự tử tế.',
-      time: '5 giờ trước'
-    },
-    {
-      author: 'BSNT Nội K47',
-      recipient: 'Tất cả các Thầy Cô giáo',
-      flower: '🌹 Hoa Hồng',
-      message: 'Nhân ngày Nhà giáo Việt Nam 20/11, xin gửi ngàn đóa hoa thơm và lòng tri ân sâu sắc nhất tới tất cả các Thầy và Cô trường Đại học Y Hà Nội!',
-      time: '5 giờ trước'
-    },
-    {
-      author: 'Sinh viên Y1 K120',
-      recipient: 'Tất cả các Thầy Cô giáo',
-      flower: '🪷 Hoa Sen',
-      message: 'Chúng em tự hào khi được bước đi dưới mái trường Y Hà Nội và được học tập từ những người thầy, người cô mẫu mực và tận tâm nhất!',
-      time: '6 giờ trước'
-    },
-    {
-      author: 'Bác sĩ Tuyến đầu Tây Bắc',
-      recipient: 'Tất cả các Thầy Cô giáo',
-      flower: '🌻 Hướng Dương',
-      message: 'Dù ở muôn phương, chúng con vẫn luôn hướng về Thầy Cô với lòng biết ơn vô hạn vì nền tảng y đức và tri thức Thầy Cô trao truyền.',
-      time: '7 giờ trước'
-    }
-  ];
-
   let allWishesPool = [];
   let displayedWishes = [];
   let autoWishesInterval = null;
   let autoWishesRunning = true;
 
   function loadWishesPool() {
-    const stored = localStorage.getItem('tribute_guestbook_wishes');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        allWishesPool = Array.isArray(parsed) && parsed.length ? parsed : [...DEFAULT_WISHES];
-      } catch (e) {
-        allWishesPool = [...DEFAULT_WISHES];
-      }
-    } else {
-      allWishesPool = [...DEFAULT_WISHES];
-      localStorage.setItem('tribute_guestbook_wishes', JSON.stringify(DEFAULT_WISHES));
-    }
-    pickInitial10Wishes();
+    allWishesPool = [];
+    displayedWishes = [];
     render10Wishes();
   }
 
@@ -3160,7 +3175,7 @@
     return loadPublicBootstrapJsonp(apiUrl);
   }
 
-  function loadPublicBootstrapJsonp(apiUrl) {
+  function loadAppsScriptJsonp(apiUrl, params) {
     return new Promise((resolve, reject) => {
       const callbackName = '__tributeCallback_' + Date.now() + '_' + Math.random().toString(36).slice(2);
       const script = document.createElement('script');
@@ -3177,9 +3192,30 @@
 
       window[callbackName] = payload => finish(resolve, payload);
       script.onerror = () => finish(reject, new Error('BOOTSTRAP_LOAD_FAILED'));
-      script.src = apiUrl + '?action=bootstrap&callback=' + encodeURIComponent(callbackName) + '&t=' + Date.now();
+      const query = new URLSearchParams({
+        ...params,
+        callback: callbackName,
+        t: String(Date.now())
+      });
+      script.src = apiUrl + '?' + query.toString();
       document.head.appendChild(script);
     });
+  }
+
+  function loadPublicBootstrapJsonp(apiUrl) {
+    return loadAppsScriptJsonp(apiUrl, { action: 'bootstrap' });
+  }
+
+  async function waitForWishSubmissionStatus(apiUrl, requestId) {
+    for (let attempt = 0; attempt < 8; attempt++) {
+      const result = await loadAppsScriptJsonp(apiUrl, { action: 'wish_status', requestId });
+      if (!result || !result.ok || !result.data) throw new Error('WISH_STATUS_FAILED');
+      const status = String(result.data.status || 'NOT_FOUND');
+      if (status === 'PENDING' || status === 'APPROVED') return status;
+      if (status !== 'NOT_FOUND') throw new Error('WISH_STATUS_' + status);
+      await new Promise(resolve => window.setTimeout(resolve, 750));
+    }
+    return 'NOT_FOUND';
   }
 
   async function syncTeachersFromGoogleSheet() {
@@ -3224,23 +3260,17 @@
       if (!teachers.length) throw new Error('TEACHER_DATA_INVALID');
 
       applyUpdatedTeachersData(teachers);
-      if (Array.isArray(result.data.wishes)) {
-        const approved = window.TributeCore
-          ? window.TributeCore.publicWishes(result.data.wishes)
-          : result.data.wishes;
-        if (approved.length) {
-          allWishesPool = approved.map(wish => ({
-            time: wish.time || 'Hôm nay',
-            author: wish.author,
-            recipient: wish.recipient || 'Thầy Cô',
-            flower: wish.flower || '🌹 Hoa Hồng',
-            message: wish.message
-          }));
-          localStorage.setItem('tribute_guestbook_wishes', JSON.stringify(allWishesPool));
-          pickInitial10Wishes();
-          render10Wishes();
-        }
-      }
+      const wishes = Array.isArray(result.data.wishes) ? result.data.wishes : [];
+      const approved = window.TributeCore ? window.TributeCore.publicWishes(wishes) : wishes;
+      allWishesPool = approved.map(wish => ({
+        time: wish.time || 'Hôm nay',
+        author: wish.author,
+        recipient: wish.recipient || 'Thầy Cô',
+        flower: wish.flower || '🌹 Hoa Hồng',
+        message: wish.message
+      }));
+      pickInitial10Wishes();
+      render10Wishes();
       if (result.data.config && result.data.config.LOGO_URL) applySiteLogo(result.data.config.LOGO_URL);
       setSheetSyncStatus('Đã đồng bộ dữ liệu trực tiếp từ Google Sheet lúc ' + new Date().toLocaleTimeString('vi-VN') + ' (' + teachers.length + ' bài thi)');
     } catch (error) {
@@ -3295,7 +3325,9 @@
     const container = document.getElementById('wishes-list');
     if (!container) return;
 
-    container.innerHTML = displayedWishes.map((w, i) => {
+    if (!displayedWishes.length) {
+      container.textContent = 'Chưa có lời tri ân được duyệt. Lời chúc mới sẽ xuất hiện sau khi được kiểm duyệt.';
+    } else container.innerHTML = displayedWishes.map((w, i) => {
       const isHighlighted = i === highlightIndex ? 'highlight-swap' : '';
       const safeAuthor = escapeHtml(w.author);
       const safeRecipient = escapeHtml(w.recipient);
@@ -3316,7 +3348,7 @@
 
     const statEl = document.getElementById('total-wishes-stat');
     if (statEl) {
-      statEl.textContent = (2024 + allWishesPool.length) + '+';
+      statEl.textContent = allWishesPool.length.toLocaleString('vi-VN');
     }
   }
 
@@ -3396,8 +3428,12 @@
   });
 
   // Submit wish: Bảo vệ honeypot, chống flood, chống injection và gửi an toàn tới Apps Script Web App
-  document.getElementById('wish-form').addEventListener('submit', (e) => {
+  let wishSubmitInFlight = false;
+  const wishForm = document.getElementById('wish-form');
+  const wishSubmitButton = wishForm.querySelector('button[type="submit"]');
+  wishForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (wishSubmitInFlight) return;
 
     // 1. Kiểm tra honeypot chống bot
     const trap = document.getElementById('form-website-trap');
@@ -3427,8 +3463,6 @@
       alert('Hệ thống chưa cấu hình URL Apps Script. Vui lòng thử lại sau.');
       return;
     }
-    localStorage.setItem('tribute_last_submit_ts', now);
-
     const safeAuthor = sanitizeFormula(author);
     const safeMsg = sanitizeFormula(message);
 
@@ -3440,60 +3474,52 @@
     };
     const flowerCode = FLOWER_CODE_MAP[selectedFlower] || 'rose';
 
-    let installationId = localStorage.getItem('tribute_installation_id');
-    if (!installationId || !/^[A-Za-z0-9_-]{12,80}$/.test(installationId)) {
-      installationId = 'inst_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
-      localStorage.setItem('tribute_installation_id', installationId);
-    }
+    const installationId = getOrCreateInstallationId();
     const requestId = 'req_' + Date.now() + '_' + Math.random().toString(36).slice(2, 14);
 
-    const newWish = {
+    const wishPayload = {
+      action: 'submit_wish',
       author: safeAuthor,
+      recipientId: recipientId,
       recipient: recipient,
-      flower: selectedFlower,
+      flower: flowerCode,
       message: safeMsg,
-      time: 'Vừa xong'
+      installationId: installationId,
+      requestId: requestId,
+      website: ''
     };
 
-    // Đưa ngay vào kho và hiển thị lập tức trong phiên người dùng
-    allWishesPool.unshift(newWish);
-    localStorage.setItem('tribute_guestbook_wishes', JSON.stringify(allWishesPool));
+    const bodyContent = window.TributeCore && window.TributeCore.toAsciiJson
+      ? window.TributeCore.toAsciiJson(wishPayload)
+      : JSON.stringify(wishPayload);
 
-    displayedWishes.unshift(newWish);
-    if (displayedWishes.length > 10) displayedWishes.pop();
-    render10Wishes(0);
-
-    // Gửi tới Apps Script Web App để lưu vào Sheet LoiChuc an toàn
-    if (apiUrl) {
-      const wishPayload = {
-        action: 'submit_wish',
-        author: safeAuthor,
-        recipientId: recipientId,
-        recipient: recipient,
-        flower: flowerCode,
-        message: safeMsg,
-        installationId: installationId,
-        requestId: requestId,
-        website: ''
-      };
-
-      const bodyContent = window.TributeCore && window.TributeCore.toAsciiJson
-        ? window.TributeCore.toAsciiJson(wishPayload)
-        : JSON.stringify(wishPayload);
-
-      fetch(apiUrl, {
+    wishSubmitInFlight = true;
+    if (wishSubmitButton) wishSubmitButton.disabled = true;
+    try {
+      await fetch(apiUrl, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: bodyContent
-      }).catch(err => console.log('Apps Script submit note:', err));
+      });
+
+      const status = await waitForWishSubmissionStatus(apiUrl, requestId);
+      if (status === 'NOT_FOUND') throw new Error('WISH_NOT_STORED');
+
+      localStorage.setItem('tribute_last_submit_ts', String(now));
+      document.getElementById('author-name').value = '';
+      document.getElementById('wish-message').value = '';
+      if (status === 'APPROVED') syncTeachersFromGoogleSheet();
+      alert(status === 'APPROVED'
+        ? '💐 Lời tri ân đã được lưu vào Google Sheet và được duyệt hiển thị.'
+        : '💐 Lời tri ân đã được lưu vào Google Sheet và đang chờ duyệt. Sau khi được duyệt, lời chúc sẽ xuất hiện trên Tường hoa.');
+    } catch (error) {
+      console.warn('Google Sheet wish submission could not be confirmed:', error);
+      alert('Chưa xác nhận được lời tri ân đã lưu vào Google Sheet. Nội dung vẫn được giữ trong biểu mẫu; vui lòng thử lại sau khi kết nối được khôi phục.');
+    } finally {
+      wishSubmitInFlight = false;
+      if (wishSubmitButton) wishSubmitButton.disabled = false;
     }
-
-    // Reset Form
-    document.getElementById('author-name').value = '';
-    document.getElementById('wish-message').value = '';
-
-    alert('💐 Cảm ơn bạn! Đóa hoa và lời chúc tri ân của bạn đã được tặng trang trọng trên Tường hoa.');
   });
 
   // CANVAS CÁNH HOA RƠI (FALLING PETALS)
@@ -3664,6 +3690,7 @@
   loadWishesPool();
   startAutoWishesCycle();
   animatePetals();
+  window.addEventListener('pagehide', sendReactionBatchOnPageExit);
   syncTeachersFromGoogleSheet();
   window.setInterval(syncTeachersFromGoogleSheet, 65000);
   document.addEventListener('visibilitychange', () => {
